@@ -1,0 +1,68 @@
+.navbar{
+    background-color: #14213d;
+    color: white;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.navbar-left{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.logo{
+    width: 60px;
+    height: 50px;
+    padding-right: 10px;
+}
+.title{
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.navbar-middle{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.navbar-middle button{
+    color: white;
+    border: solid 0px;
+    background-color: #fca311;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 3px solid #14213d;
+
+}
+.navbar-middle .home-button{
+    background-color: white;
+    color: black;
+}
+
+.navbar-middle .products-button{
+    background-color: white;
+    color: black;
+}
+.navbar-middle .gallery-button{
+    background-color: white;
+    color: black;
+}
+.navbar-middle .about-button{
+    background-color: white;
+    color: black;
+}
+.navbar-middle .contact-button{
+    background-color: white;
+    color: black;
+}
+
+
+.navbar-middle button:hover{
+    outline-color: white;
+    border-bottom: 3px solid white;
+}
+

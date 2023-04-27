@@ -1,0 +1,47 @@
+.foot{
+    padding-left: 60px;
+    color: white;
+    display: flex;
+    background-color: #14213d;
+    border-top-left-radius: 250px;
+    align-items: top;
+    padding-top: 100px;
+    justify-content: space-between;
+    column-gap: 50px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+}
+.foot h3{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.one{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    text-align: justify;
+}
+.two{
+    display: flex;
+    flex-direction: column;
+}
+.two a{
+    color: white;
+}
+
+.three{
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+.three input{
+    padding:10px;
+}
+.three button{
+    margin-top: 10px;
+    border: solid 0px;
+    background-color: #fca311;
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
