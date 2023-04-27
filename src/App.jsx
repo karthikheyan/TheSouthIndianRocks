@@ -17,15 +17,14 @@ function App() {
       <Header/>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
-          <Route path='/products' element={<Products/>}>
-            <Route path='/products/types' element={<Types/>}>
-              {/* <Route path='/productslist' element={<ProductsList/>}></Route> */}
-            </Route>
-          </Route>
+          <Route path='/products' element={<Products/>}></Route>
+          <Route path='/types/:category' element={<Types/>}></Route>
+          <Route path='/productslist/:type' element={<ProductsList/>}></Route>
           <Route path='/gallery' element={<Gallery/>}></Route>
           <Route path='/about' element={<About/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/admin' element={<Admin/>}></Route>
+          <Route path="*" element={<Home/>}></Route>
         </Routes>
       <Footer/>
     </div>
