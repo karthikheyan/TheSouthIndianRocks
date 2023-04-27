@@ -7,6 +7,7 @@ const ProductType=require("../models/type")
 const Category=require("../models/category")
 const multer = require("multer")
 const fs=require("fs")
+const { log } = require("console")
 const app=express()
 
 
@@ -24,7 +25,7 @@ const cat_storage = multer.diskStorage({
   
   routes.post("/category", upload_cat.single("categoryImage"), (req, res) => {
     const saveImage =  Category({
-      pname: req.body.pname,
+      cname: req.body.cname,
       img: {
         data: fs.readFileSync("uploads/category_images/" + req.file.filename),
         contentType: "image/png",
@@ -57,15 +58,21 @@ const type_storage = multer.diskStorage({
   
   const upload_type = multer({ storage: type_storage });
 
-  routes.post("/types", upload_type.single("productTypeImage"), (req, res) => {
+  routes.post("/types", upload_type.single("productTypeImage"), async(req, res) => {
+    try{
+    const category=req.body.category;
+    console.log(category);
+    const cat=await Category.find({cname:category})
+    const id=cat[0].id
+    console.log(id);
     const saveImage =  ProductType({
-      pname: req.body.pname,
+      tname: req.body.tname,
       img: {
         data: fs.readFileSync("uploads/product_types/" + req.file.filename),
         contentType: "image/png",
       },
       description:req.body.description,
-      category_id:req.body.cat_id
+      category_id:id
     });
     saveImage
       .save()
@@ -76,6 +83,11 @@ const type_storage = multer.diskStorage({
         console.log(err, "error has occur");
       });
       res.send('type image is saved')
+    }
+    catch(err){
+      console.log(err)
+              res.send(412)
+    }
   });
   
 
@@ -92,7 +104,23 @@ const product_storage = multer.diskStorage({
   
   const upload_product = multer({ storage: product_storage });
 
-  routes.post("/products", upload_product.single("productImage"), (req, res) => {
+  routes.post("/products", upload_product.single("productImage"),async (req, res) => {
+    try{
+    const category=req.body.category;
+    console.log(category);
+    const cat=await Category.find({cname:category})
+    const c_id=cat[0].id
+    console.log("dsd"+c_id);
+
+
+    const product=req.body.type
+    const pro=await ProductType.find({tname:product})
+    const p_id=pro[0].id;
+    console.log(p_id)
+
+
+
+
     const saveImage =  Product({
       pname: req.body.pname,
       img: {
@@ -102,8 +130,8 @@ const product_storage = multer.diskStorage({
       description:req.body.description,
       price:req.body.price,
       rating:req.body.rating,
-      product_type_id:req.body.type_id,
-      category_id:req.body.cat_id,
+      product_type_id:p_id,
+      category_id:c_id,
 
     });
     saveImage
@@ -115,6 +143,12 @@ const product_storage = multer.diskStorage({
         console.log(err, "error has occur");
       });
       res.send('product image is saved')
+
+    }
+    catch(err){
+      console.log(err)
+      res.send(412)
+    }
   });
   
 
@@ -134,11 +168,11 @@ console.log(err)
 })
 
 
-//get acccording to category
+//get types acccording to category
 
 routes.get("/category/type/:category",async(req,res)=>{
     try{
-        const category= await Category.find({pname:req.params.category})
+        const category= await Category.find({cname:req.params.category})
         console.log(typeof(category[0].id))
         const types= await ProductType.find({category_id:category[0].id})
         res.send(types)
@@ -155,7 +189,7 @@ routes.get("/category/type/:category",async(req,res)=>{
 routes.get("/category/product/:type",async(req,res)=>{
   console.log(req.params.type)
   try{
-    const type=await ProductType.find({pname:req.params.type})
+    const type=await ProductType.find({tname:req.params.type})
     const products= await Product.find({product_type_id:type[0].id})
     res.send(products)
   }

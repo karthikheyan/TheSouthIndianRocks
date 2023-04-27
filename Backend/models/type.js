@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 
 const TypeSchema=new mongoose.Schema({
-    pname: {
+    tname: {
         type: String,
         required: true
       },
