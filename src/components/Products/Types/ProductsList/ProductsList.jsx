@@ -27,7 +27,7 @@ const ProductsList = () => {
                     </div>
                 </Link>)
           }
-          ):<div>No categories to display</div>}
+          ):<div>No Products to display</div>}
         </div>
     </div>
   )

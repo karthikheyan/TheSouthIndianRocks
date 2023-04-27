@@ -19,9 +19,9 @@ const Types = () => {
           const base64String = btoa(
             String.fromCharCode(...new Uint8Array(type.img.data.data))
           );
-              return(<Link key={type._id} to={`/productslist/${type.pname}`}>
+              return(<Link key={type._id} to={`/productslist/${type.tname}`}>
                   <div className="products-grid-box">
-                      <h3>{type.pname}</h3>
+                      <h3>{type.tname}</h3>
                       <img src={`data:image/png;base64,${base64String}`} alt="image"/>
                       <p>{type.description}</p>
                   </div>
