@@ -138,8 +138,13 @@ console.log(err)
 
 routes.get("/category/type/:category",async(req,res)=>{
     try{
+<<<<<<< HEAD
         const category= await Category.find({pname:req.params.type})
         //console.log(typeof(category[0].id))
+=======
+        const category= await Category.find({pname:req.params.category})
+        console.log(typeof(category[0].id))
+>>>>>>> c4db9aae83108305db252935dd20eeffdce94d19
         const types= await ProductType.find({category_id:category[0].id})
         res.send(types)
     }
@@ -163,6 +168,7 @@ routes.get("/category/product/:type",async(req,res)=>{
     res.sendStatus(412)
   }
 })
+
 
 
 
