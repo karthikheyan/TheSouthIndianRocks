@@ -120,9 +120,18 @@ const product_storage = multer.diskStorage({
 
 
 
-  
+//get category
 
+routes.get("/category",async(req,res)=>{
+  try{
+  const category=await Category.find()
+  res.send(category)
+  }
+  catch(err){
+console.log(err)
 
+  }
+})
 
 
 
