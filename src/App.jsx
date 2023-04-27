@@ -5,6 +5,8 @@ import Contact from './components/Contact us/Contact';
 import Gallery from './components/Gallery/Gallery';
 import Home from './components/Home/Home';
 import Products from './components/Products/Products';
+import ProductsList from './components/Products/Types/ProductsList/ProductsList';
+import Types from './components/Products/Types/Types';
 import Footer from './components/navbar/Footer'
 import Header from './components/navbar/Header'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -16,8 +18,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/products' element={<Products/>}>
-            <Route path='/types'>
-              <Route path='/productslist'></Route>
+            <Route path='/products/types' element={<Types/>}>
+              {/* <Route path='/productslist' element={<ProductsList/>}></Route> */}
             </Route>
           </Route>
           <Route path='/gallery' element={<Gallery/>}></Route>
