@@ -136,10 +136,10 @@ console.log(err)
 
 //get acccording to category
 
-routes.get("/category/type/:type",async(req,res)=>{
+routes.get("/category/type/:category",async(req,res)=>{
     try{
         const category= await Category.find({pname:req.params.type})
-        console.log(typeof(category[0].id))
+        //console.log(typeof(category[0].id))
         const types= await ProductType.find({category_id:category[0].id})
         res.send(types)
     }
@@ -148,6 +148,21 @@ routes.get("/category/type/:type",async(req,res)=>{
     }
 })
 
+
+//get products according to types
+
+
+routes.get("/category/product/:type",async(req,res)=>{
+  console.log(req.params.type)
+  try{
+    const type=await ProductType.find({pname:req.params.type})
+    const products= await Product.find({product_type_id:type[0].id})
+    res.send(products)
+  }
+  catch(err){
+    res.sendStatus(412)
+  }
+})
 
 
 
