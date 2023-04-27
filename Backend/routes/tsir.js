@@ -134,6 +134,21 @@ console.log(err)
 })
 
 
+//get acccording to category
+
+routes.get("/category/type/:type",async(req,res)=>{
+    try{
+        const category= await Category.find({pname:req.params.type})
+        console.log(typeof(category[0].id))
+        const types= await ProductType.find({category_id:category[0].id})
+        res.send(types)
+    }
+    catch(err){
+      res.sendStatus(412)
+    }
+})
+
+
 
 
 
