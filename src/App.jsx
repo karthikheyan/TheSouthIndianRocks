@@ -1,10 +1,14 @@
 import './App.css'
 import About from './components/About us/About';
+import AddCategory from './components/Admin/AddItems/AddCategory';
+import AddProducts from './components/Admin/AddItems/AddProducts';
+import AddType from './components/Admin/AddItems/AddType';
 import Admin from './components/Admin/Admin';
 import Contact from './components/Contact us/Contact';
 import Gallery from './components/Gallery/Gallery';
 import Home from './components/Home/Home';
 import Products from './components/Products/Products';
+import Purchase from './components/Products/Purchase';
 import ProductsList from './components/Products/Types/ProductsList/ProductsList';
 import Types from './components/Products/Types/Types';
 import Footer from './components/navbar/Footer'
@@ -24,6 +28,10 @@ function App() {
           <Route path='/about' element={<About/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/admin' element={<Admin/>}></Route>
+          <Route path='/admin/addcategory' element={<AddCategory/>}></Route>
+          <Route path='/admin/addtype' element={<AddType/>}></Route>
+          <Route path='/admin/addproduct' element={<AddProducts/>}></Route>
+          <Route path='/purchase' element={<Purchase/>}></Route>
           <Route path="*" element={<Home/>}></Route>
         </Routes>
       <Footer/>
