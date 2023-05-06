@@ -9,6 +9,7 @@ const multer = require("multer")
 const fs=require("fs")
 const { log } = require("console")
 const app=express()
+const path=require("path")
 
 
 
@@ -144,7 +145,7 @@ const upload_product= multer({
   }
 });
 
-  routes.post("/products", upload_product.single("productImage"),async (req, res) => {
+  routes.post("/product", upload_product.single("productImage"),async (req, res) => {
     try{
       const url = req.protocol + '://' + req.get('host')
     const category=req.body.category;

@@ -16,13 +16,10 @@ const Types = () => {
     <div>
         <div className='products-grid'>
         {types ? types.map((type)=>{
-          const base64String = btoa(
-            String.fromCharCode(...new Uint8Array(type.img.data.data))
-          );
               return(<Link key={type._id} to={`/productslist/${type.tname}`}>
                   <div className="products-grid-box">
                       <h3>{type.tname}</h3>
-                      <img src={`data:image/png;base64,${base64String}`} alt="image"/>
+                      <img src={type.img} alt="image"/>
                       <p>{type.description}</p>
                   </div>
               </Link>)

@@ -1,43 +1,87 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 const AddType = () => {
+  const [tname, setTname] = useState("");
+  const [pname, setPname] = useState("");
+  const [cname, setCname] = useState("");
+  const [description, setDescription] = useState("");
+  const [typeImage, setTypeImage] = useState(null);
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("tname", tname);
+    formData.append("category",cname);
+    formData.append("description", description);
+    formData.append("productTypeImage", typeImage);
+
+    console.log(formData.get('cname'))
+    fetch("http://localhost:3000/tsir/types/", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const handleSelect = (e)=>{
+    setCname(e.target.value);
+  }
+
+  function handleFileChange(event) {
+    setTypeImage(event.target.files[0]);
+  }
+
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         fetch("http://localhost:3000/tsir/category")
         .then((res)=>res.json())
         .then((data)=>{
             setCategories(data);
-          console.log(data);
+            setCname(data[0].cname)
         });
     
       }, [])
     
   return (
     <div>
-      <form className='addcategory-form' action="">
+      <form className='addcategory-form' onSubmit={handleFormSubmit}>
       <label htmlFor="">Select category</label>
-      <select>
+      <select value={cname} onChange={handleSelect}>
       {categories && categories.map((category)=>{
         return(
-            <option>{category.cname}</option>
+            <option key={category._id} value={category.cname}>{category.cname}</option>
         )
       })}
 
       </select>
-        <label htmlFor="">Type name</label>
+        <label htmlFor="">Product name</label>
         <input
-        type="text" 
+        type="text"
+        value={tname}
+        onChange={(e)=> setTname(e.target.value)} 
         required
         />
 
         <label htmlFor="">Description</label>
         <textarea 
         type="text"
+        value={description}
+        onChange={(e)=> setDescription(e.target.value)} 
         required
         />
 
         <label htmlFor="">Add Image file for thumbnail</label>
-        <input type="file" />
+        <input 
+        type="file"
+        onChange={handleFileChange}
+         />
          <input 
          type="submit"
          />
