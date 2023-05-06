@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './Products.css'
 const Products = () => {
-  let [categories, setCategories] = useState([]);
+
+  const [isPending, setIsPending] = useState(false)
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/tsir/category")
     .then((res)=>res.json())

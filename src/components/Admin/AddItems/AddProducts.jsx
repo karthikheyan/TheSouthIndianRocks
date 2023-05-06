@@ -17,7 +17,7 @@ const AddProducts = () => {
     formData.append("category",cname);
     formData.append("pname",pname);
     formData.append("price",price);
-    formData.append("rating",4.5);
+    formData.append("rating",0);
     formData.append("description", description);
     formData.append("productImage", productImage);
 
@@ -39,7 +39,7 @@ const AddProducts = () => {
     setCname(e.target.value);
   }
   const handleTnameSelect = (e)=>{
-    setPname(e.target.value)
+    setTname(e.target.value)
   }
 
   function handleFileChange(event) {
@@ -71,6 +71,7 @@ const AddProducts = () => {
   
   return (
     <div>
+      <h3>Add a new product</h3>
       <form className='addcategory-form' onSubmit={handleFormSubmit} action="">
 
       <label>Category</label> 

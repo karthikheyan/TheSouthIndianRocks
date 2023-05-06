@@ -51,6 +51,7 @@ const AddType = () => {
     
   return (
     <div>
+      <h3>Add a new Product type</h3>
       <form className='addcategory-form' onSubmit={handleFormSubmit}>
       <label htmlFor="">Select category</label>
       <select value={cname} onChange={handleSelect}>

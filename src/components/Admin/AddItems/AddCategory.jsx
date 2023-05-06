@@ -33,6 +33,7 @@ const AddCategory = () => {
   }
   return (
     <div>
+      <h3>Add a new Category</h3>
       <form className='addcategory-form' onSubmit={handleFormSubmit}>
         <label htmlFor="">Category name</label>
         <input
