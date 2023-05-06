@@ -6,9 +6,9 @@ const TypeSchema=new mongoose.Schema({
         required: true
       },
       img:{
-        data:Buffer,
-        contentType:String,
-    },
+        type: String,
+        required: true
+      },
       description: {
         type: String,
         required: true
@@ -16,6 +16,10 @@ const TypeSchema=new mongoose.Schema({
       category_id:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Categories',
+        required:true
+      },
+      category_name:{
+        type:String,
         required:true
       }
 })

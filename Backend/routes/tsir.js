@@ -13,23 +13,35 @@ const app=express()
 
 
 const cat_storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+  destination: (req, file, cb) => {
       cb(null, "./uploads/category_images");
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  });
-  
-  const upload_cat = multer({ storage: cat_storage });
+  },
+  filename: (req, file, cb) => {
+      const fileName = file.originalname.toLowerCase().split(' ').join('-');
+      cb(null, fileName)
+  }
+});
+
+const upload_cat= multer({
+  storage: cat_storage,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+    const allowedExtensions = [".png", ".jpeg", ".jpg", ".gif"];
+
+    if (allowedMimeTypes.includes(file.mimetype) && allowedExtensions.includes(path.extname(file.originalname).toLowerCase())) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+        return cb(new Error('Allowed only .png, .jpg, .jpeg, and .gif'));
+    }
+  }
+});
   
   routes.post("/category", upload_cat.single("categoryImage"), (req, res) => {
+    const url = req.protocol + '://' + req.get('host')
     const saveImage =  Category({
       cname: req.body.cname,
-      img: {
-        data: fs.readFileSync("uploads/category_images/" + req.file.filename),
-        contentType: "image/png",
-      },
+      img: url + '/uploads/category_images/' + req.file.filename,
       description:req.body.description
     });
     saveImage
@@ -47,19 +59,35 @@ const cat_storage = multer.diskStorage({
   // product types upload
 
   
-const type_storage = multer.diskStorage({
+  const type_storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "./uploads/product_types");
+        cb(null, "./uploads/product_types");
     },
     filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, fileName)
+    }
   });
   
-  const upload_type = multer({ storage: type_storage });
+  const upload_type= multer({
+    storage: type_storage,
+    fileFilter: (req, file, cb) => {
+      const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+      const allowedExtensions = [".png", ".jpeg", ".jpg", ".gif"];
+  
+      if (allowedMimeTypes.includes(file.mimetype) && allowedExtensions.includes(path.extname(file.originalname).toLowerCase())) {
+          cb(null, true);
+      } else {
+          cb(null, false);
+          return cb(new Error('Allowed only .png, .jpg, .jpeg, and .gif'));
+      }
+    }
+  });
+   
 
   routes.post("/types", upload_type.single("productTypeImage"), async(req, res) => {
     try{
+      const url = req.protocol + '://' + req.get('host')
     const category=req.body.category;
     //console.log(category);
     const cat=await Category.find({cname:category})
@@ -67,12 +95,10 @@ const type_storage = multer.diskStorage({
   
     const saveImage =  ProductType({
       tname: req.body.tname,
-      img: {
-        data: fs.readFileSync("uploads/product_types/" + req.file.filename),
-        contentType: "image/png",
-      },
+      img:url + '/uploads/product_types/' + req.file.filename,
       description:req.body.description,
-      category_id:id
+      category_id:id,
+      category_name:req.body.category
     });
     saveImage
       .save()
@@ -94,20 +120,35 @@ const type_storage = multer.diskStorage({
 // product upload
 
 const product_storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+  destination: (req, file, cb) => {
       cb(null, "./uploads/products");
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  });
-  
-  const upload_product = multer({ storage: product_storage });
+  },
+  filename: (req, file, cb) => {
+      const fileName = file.originalname.toLowerCase().split(' ').join('-');
+      cb(null, fileName)
+  }
+});
+
+const upload_product= multer({
+  storage: product_storage,
+  fileFilter: (req, file, cb) => {
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/jfif"];
+    const allowedExtensions = [".png", ".jpeg", ".jpg", ".gif", ".jfif"];
+
+    if (allowedMimeTypes.includes(file.mimetype) && allowedExtensions.includes(path.extname(file.originalname).toLowerCase())) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+        return cb(new Error('Allowed only .png, .jpg, .jpeg, and .gif,jfif'));
+    }
+  }
+});
 
   routes.post("/products", upload_product.single("productImage"),async (req, res) => {
     try{
+      const url = req.protocol + '://' + req.get('host')
     const category=req.body.category;
-    
+    console.log(req.body.category);
     const cat=await Category.find({cname:category})
     const c_id=cat[0].id
     //console.log("dsd"+c_id);
@@ -123,15 +164,14 @@ const product_storage = multer.diskStorage({
 
     const saveImage =  Product({
       pname: req.body.pname,
-      img: {
-        data: fs.readFileSync("uploads/products/" + req.file.filename),
-        contentType: "image/png",
-      },
+      img: url + '/uploads/products/' + req.file.filename ,
       description:req.body.description,
       price:req.body.price,
       rating:req.body.rating,
       product_type_id:p_id,
+      product_type:req.body.type,
       category_id:c_id,
+      category_type:req.body.category,
 
     });
     saveImage
@@ -159,6 +199,7 @@ const product_storage = multer.diskStorage({
 routes.get("/category",async(req,res)=>{
   try{
   const category=await Category.find()
+ // console.log(category.length);
   res.send(category)
   }
   catch(err){
@@ -198,16 +239,76 @@ routes.get("/category/product/:type",async(req,res)=>{
 
 
 
-routes.get("/gallery",async(req,res)=>{
-  try{
-    const products= await Product.find()
-    res.send(products)
-  }
-  catch(err){
-         console.log(err)
-  }
-})
+// routes.get("/gallery",async(req,res)=>{
+//   try{
+//     const products= await Product.find()
+//     res.send(products)
+//   }
+//   catch(err){
+//          console.log(err)
+//   }
+// })
  
+
+
+
+
+
+// const path = require('path');
+
+// const DIR = './public/';
+// const PATH = './public/';
+
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, "./public");
+//     },
+//     filename: (req, file, cb) => {
+//         const fileName = file.originalname.toLowerCase().split(' ').join('-');
+//         cb(null, fileName)
+//     }
+// });
+
+// const uploadnew= multer({
+//     storage: storage,
+//     fileFilter: (req, file, cb) => {
+//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
+//             cb(null, true);
+//         } else {
+//             cb(null, false);
+//             return cb(new Error('Allowed only .png, .jpg, .jpeg and .gif'));
+//         }
+//     }
+// });
+
+
+
+
+// routes.post('/add', uploadnew.single('image'), (req, res, next) => {
+//   //console.log(req.file.path);
+//   const url = req.protocol + '://' + req.get('host')
+//     const user = new Image({
+//         name: req.body.name,
+//         imageURL: url + '/public/' + req.file.filename
+//     });
+//     user.save().then(result => {
+//         res.status(201).json({
+//             message: "User registered successfully!",
+//         })
+//     })
+// })
+
+
+// routes.get("/", (req, res, next) => {
+//   Image.find().then(data => {
+//       res.status(200).json({
+//           message: "User list retrieved successfully!",
+//           users: data
+//       });
+//   });
+// });
+
+
 
 
 

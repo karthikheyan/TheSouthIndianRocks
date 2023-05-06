@@ -5,9 +5,9 @@ const ProductSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    img: {
-      data: Buffer,
-      contentType: String,
+    img:  {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
@@ -26,9 +26,17 @@ const ProductSchema = new mongoose.Schema({
       ref: 'ProductTypes',
       required: true,
     },
+    product_type: {
+      type: String,
+      required: true,
+    },
     category_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Categories',
+      required: true,
+    },
+    category_type: {
+      type: String,
       required: true,
     },
   });
