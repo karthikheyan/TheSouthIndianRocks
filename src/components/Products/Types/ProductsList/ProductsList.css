@@ -7,6 +7,7 @@
     margin: auto 40vh;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 30px;
+    justify-content: left;
 }
 .products-list-grid-box{
     margin-top: 40px;
@@ -15,8 +16,6 @@
     padding: 30px;
     border-color:#14213d;
     border-width:4px;
-    border-radius: 100px;
-    transition: border-radius 1s;
 }
 
 .products-list-grid-box:hover{
@@ -29,7 +28,7 @@
 
 }
 .products-list-grid-box img{
-    height: 300px;
+    height: 150px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
