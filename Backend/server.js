@@ -8,6 +8,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json())
 dotenv.config()
 app.use(cors())
+
 mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log("Db connected")
 })
