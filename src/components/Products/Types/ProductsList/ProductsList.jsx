@@ -26,7 +26,7 @@ const ProductsList = () => {
                         <p>{product.description}</p>
                         <h4>PRICE: {product.price}/piece</h4>
                         <p>Ratings: {product.rating}</p>
-                        <Link to="/purchase">Order now</Link>
+                        <Link to="/purchase"><button>Order now</button></Link>
                     </div>
                 </Link>)
           }

@@ -55,7 +55,7 @@ const Purchase = () => {
                 </div>
             </div>
             <div class="btns">
-                <button>Purchase</button>
+                <button>Place order</button>
                 <button>Back to cart</button>
             </div>
         </form>
