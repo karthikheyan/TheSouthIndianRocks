@@ -10,6 +10,7 @@ const fs=require("fs")
 const { log } = require("console")
 const product = require("../models/product")
 const app=express()
+const path=require("path")
 
 
 

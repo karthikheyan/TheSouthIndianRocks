@@ -16,13 +16,10 @@ const ProductsList = () => {
     <div className='products-list'>
         <div className='products-list-grid'>
           {productList ? productList.map((product)=>{
-              const base64String = btoa(
-              String.fromCharCode(...new Uint8Array(product.img.data.data))
-              );
                 return(<Link key={product._id} to="/purchase">
                     <div className="products-list-grid-box">
                         <h3>{product.pname}</h3>
-                        <img src={`data:image/png;base64,${base64String}`} alt="image"/>
+                        <img src={product.img} alt="image"/>
                         <p>{product.description}</p>
                         <h4>PRICE: {product.price}/piece</h4>
                         <p>Ratings: {product.rating}</p>
