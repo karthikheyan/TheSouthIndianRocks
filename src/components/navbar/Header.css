@@ -60,6 +60,10 @@
     background-color: white;
     color: black;
 }
+.navbar-middle .login-button{
+    background-color: white;
+    color: black;
+}
 
 
 .navbar-middle button:hover{

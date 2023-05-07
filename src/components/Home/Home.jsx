@@ -9,8 +9,9 @@ import person1Image from "../../images/Home/person1.jpg"
 import person2Image from "../../images/Home/person2.jpg"
 
 const Home = () => {
-  return (
-    <>
+
+    return (
+        <>
         <div className="services">
             <h2>Our Services</h2>
             <p>The services by the South Indian Rocks including these</p>

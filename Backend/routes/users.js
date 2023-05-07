@@ -48,7 +48,7 @@ routes.post("/user/signup",async(req,res)=>{
 
 //user log in
 
-routes.post("/user/login",async(req,res)=>{
+routes.post("/login",async(req,res)=>{
 
 try{
   const { UserName,password}=req.body;

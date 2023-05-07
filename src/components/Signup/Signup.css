@@ -1,8 +1,8 @@
-.login-container {
+.signup-container {
     font-family: Arial, sans-serif;
   }
   
-.login-container form {
+  .signup-container form {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -13,8 +13,10 @@
     color: #14213d;
   }
   
-.login-container input[type=text],
-.login-container  input[type=password] {
+  .signup-container input[type=text],
+  .signup-container input[type=number],
+  .signup-container input[type=email],
+  .signup-container input[type=password] {
     padding: 10px;
     width: 90%;
     margin-bottom: 20px;
@@ -22,7 +24,7 @@
     border: 1px solid gray;
   }
   
-  .login-container button[type=submit] {
+  .signup-container button[type=submit] {
     background-color: #fca311;
     color: #fff;
     padding: 10px 20px;
@@ -30,8 +32,11 @@
     border: none;
     cursor: pointer;
   }
+  .signup-container h6{
+    font-size: 16px;
+  }
   
-  .login-container button[type=submit]:hover {
+  .signup-container button[type=submit]:hover {
     background-color: #14213d;
   }
   
