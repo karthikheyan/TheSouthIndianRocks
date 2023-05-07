@@ -1,11 +1,12 @@
 .types{
+    min-height: 100vh;
     margin-top: 50px;
     text-align: center;
 }
 .types-grid{
     display: grid;
-    margin: auto 40vh;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto 10%;
+    grid-template-columns: 1fr 1fr;
     column-gap: 30px;
 }
 .types-grid-box{

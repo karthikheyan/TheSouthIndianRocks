@@ -7,6 +7,7 @@ import Admin from './components/Admin/Admin';
 import Contact from './components/Contact us/Contact';
 import Gallery from './components/Gallery/Gallery';
 import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 import Products from './components/Products/Products';
 import Purchase from './components/Products/Purchase';
 import ProductsList from './components/Products/Types/ProductsList/ProductsList';
@@ -21,6 +22,7 @@ function App() {
       <Header/>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
           <Route path='/products' element={<Products/>}></Route>
           <Route path='/types/:category' element={<Types/>}></Route>
           <Route path='/productslist/:type' element={<ProductsList/>}></Route>
