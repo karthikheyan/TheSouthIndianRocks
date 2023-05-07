@@ -27,4 +27,27 @@ routes.get('/product/:id',async(req,res)=>{
     }
 })
 
+
+routes.post('/addtocart/:uid/:pid',async(req,res)=>{
+    try{
+        const user_id=req.params.uid
+        const product_id=req.params.pid
+        const user=await User.findByIdAndUpdate(user_id,{$push:{cart:product_id}},{new:true})
+        if(user){
+
+                console.log("User's cart array updated successfully")
+                 res.status(200)
+            } else {
+                res.status(404)
+              
+          }
+          res.send("ok")
+    }
+
+    catch(err){
+        console.log(err)
+        res.status(400)
+    }
+})
+
 module.exports=routes

@@ -16,31 +16,32 @@ const { json } = require("body-parser")
 
 
 //create new user
-routes.post("/user/signup",async(req,res)=>{
-    console.log(req.body)
+routes.post("/signup",async(req,res)=>{
     try{
         const pwd=req.body.password;
         const hashedpwd=await bcrypt.hash(pwd,10);
-        const { UserName,password,email,address } = req.body;
+        const { UserName,password,email,address,phone } = req.body;
 
   const newUser = new User({
     UserName,
     email,
     password:hashedpwd,
-    address
+    address,
+    phone
   })
   newUser.save()
-  .then((res) => {
-    //console.log("Newuser is created");
+  .then(() => {
+    res.send("Newuser is created")
   })
   .catch((err) => {
-    console.log(err, "error has occur");
+    //console.log(err, "error has occur");
+    res.send(err.message)
   });
-  res.send("Newuser is created")
+ 
     }
     catch(err){
-        console.log(err)
-        res.send(err)
+        //console.log(err)
+        res.send(err.message)
     }
 })
 
