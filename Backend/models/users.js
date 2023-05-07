@@ -18,9 +18,11 @@ const userSchema=mongoose.Schema({
         street: String,
         city: String,
         state: String,
-        zipCode: String,
-        country: String
-      }, 
+      },
+      phone:{
+        type:Number,
+        required:true
+      },
     createdAt: {
         type: Date,
         default: Date.now
@@ -28,6 +30,10 @@ const userSchema=mongoose.Schema({
       purchases: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Purchase'
+      }],
+      cart:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
       }]
 })
 
