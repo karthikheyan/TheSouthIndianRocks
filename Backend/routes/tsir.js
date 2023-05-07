@@ -8,6 +8,7 @@ const Category=require("../models/category")
 const multer = require("multer")
 const fs=require("fs")
 const { log } = require("console")
+const product = require("../models/product")
 const app=express()
 
 
@@ -129,6 +130,7 @@ const product_storage = multer.diskStorage({
   }
 });
 
+
 const upload_product= multer({
   storage: product_storage,
   fileFilter: (req, file, cb) => {
@@ -139,12 +141,12 @@ const upload_product= multer({
         cb(null, true);
     } else {
         cb(null, false);
-        return cb(new Error('Allowed only .png, .jpg, .jpeg, and .gif,jfif'));
+        return cb(new Error('Allowed only .png, .jpg, .jpeg, and .gif, .jfif'));
     }
   }
 });
 
-  routes.post("/products", upload_product.single("productImage"),async (req, res) => {
+  routes.post("/product ", upload_product.single("productImage"),async (req, res) => {
     try{
       const url = req.protocol + '://' + req.get('host')
     const category=req.body.category;
@@ -237,6 +239,15 @@ routes.get("/category/product/:type",async(req,res)=>{
   }
 })
 
+routes.delete("/product/delete/:id",async(req,res)=>{
+  try{
+        const product=await Product.deleteOne({_id:req.params.id})
+
+  }
+  catch(err){
+console.log();
+  }
+})
 
 
 // routes.get("/gallery",async(req,res)=>{

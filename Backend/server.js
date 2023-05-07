@@ -19,6 +19,8 @@ app.use('/public', express.static('public'));
 app.use('/uploads/products', express.static('uploads/products'));
 
 app.use('/tsir',require("./routes/tsir.js"))
+app.use('/tsir/users',require("./routes/users.js"))
+app.use('/tsir/purchase',require("./routes/purchase.js"))
 
 
 app.listen(3000,()=>{
