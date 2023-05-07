@@ -4,57 +4,57 @@ const Purchase = () => {
   return (
     <div className='wrapper'>
         <h3>Order details</h3>
-        <form className="purchase-form" action="">
+        <form className="purchase-htmlForm" action="">
             <h1>
-                <i class="fas fa-shipping-fast"></i>
+                <i className="fas fa-shipping-fast"></i>
                 Shipping Details
             </h1>
-            <div class="name">
+            <div className="name">
                 <div>
-                    <label for="f-name">First</label>
+                    <label htmlFor="f-name">First</label>
                     <input type="text" name="f-name"/>
                 </div>
                 <div>
-                    <label for="l-name">Last</label>
+                    <label htmlFor="l-name">Last</label>
                     <input type="text" name="l-name"/>
                 </div>
             </div>
-            <div class="street">
-                <label for="name">Street</label>
+            <div className="street">
+                <label htmlFor="name">Street</label>
                 <input type="text" name="address"/>
             </div>
-            <div class="address-info">
+            <div className="address-info">
                 <div>
-                    <label for="city">City</label>
+                    <label htmlFor="city">City</label>
                     <input type="text" name="city"/>
                 </div>
                 <div>
-                    <label for="state">State</label>
+                    <label htmlFor="state">State</label>
                     <input type="text" name="state"/>
                 </div>
                 <div>
-                    <label for="zip">Zip</label>
+                    <label htmlFor="zip">Zip</label>
                     <input type="text" name="zip"/>
                 </div>
             </div>
             <h1>
-                <i class="far fa-credit-card"></i> Payment Information
+                <i className="far fa-credit-card"></i> Payment InhtmlFormation
             </h1>
-            <div class="cc-num">
-                <label for="card-num">Credit Card No.</label>
+            <div className="cc-num">
+                <label htmlFor="card-num">Credit Card No.</label>
                 <input type="text" name="card-num"/>
             </div>
-            <div class="cc-info">
+            <div className="cc-info">
                 <div>
-                    <label for="card-num">Exp</label>
+                    <label htmlFor="card-num">Exp</label>
                     <input type="text" name="expire"/>
                 </div>
                 <div>
-                    <label for="card-num">CCV</label>
+                    <label htmlFor="card-num">CCV</label>
                     <input type="text" name="security"/>
                 </div>
             </div>
-            <div class="btns">
+            <div className="btns">
                 <button>Place order</button>
                 <button>Back to cart</button>
             </div>

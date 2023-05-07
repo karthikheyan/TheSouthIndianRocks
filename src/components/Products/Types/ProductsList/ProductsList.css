@@ -1,16 +1,18 @@
 .products-list{
+    min-height: 100vh;
     margin-top: 50px;
     text-align: center;
 }
 .products-list-grid{
     display: grid;
-    margin: auto 40vh;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto 10%;
+    margin-top: 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
     column-gap: 30px;
     justify-content: left;
 }
 .products-list-grid-box{
-    margin-top: 40px;
+    height: 380px;
     border: solid 1px;
     box-shadow: 6px 10px 10px rgba(0,0,0,0.5);
     padding: 30px;
@@ -28,10 +30,11 @@
 
 }
 .products-list-grid-box img{
-    height: 150px;
+    height: 200px;
+    width: 200px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 .products-list-grid-box h3{
-    font-size: 30px;
+    font-size: 20px;
 }
