@@ -22,8 +22,10 @@ routes.post("/signup",async(req,res)=>{
         const hashedpwd=await bcrypt.hash(pwd,10);
         
         const { UserName,password,email,address,phone } = req.body;
-        const duplicate=User.findOne({email:email})
-if(!duplicate){
+        const duplicate=await User.find({email:email})
+        console.log(duplicate)
+        if (duplicate.length>=1) return res.status(409).json({ 'Fail': `Mail already used!` });
+
   const newUser = new User({
     UserName,
     email,
@@ -39,10 +41,6 @@ if(!duplicate){
     res.send(err.message)
   });
 }
-else{
-  res.status(401).send("Try with another user name");
-}
-    }
     catch(err){
         //console.log(err)
         res.send(err.message)

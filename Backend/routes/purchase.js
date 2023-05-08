@@ -50,4 +50,15 @@ routes.post('/addtocart/:uid/:pid',async(req,res)=>{
     }
 })
 
+
+
+routes.get("/cart/:uid",async(req,res)=>{
+    try{
+             
+    }
+    catch(err){
+
+    }
+})
+
 module.exports=routes
