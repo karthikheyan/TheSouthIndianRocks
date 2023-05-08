@@ -22,7 +22,7 @@ routes.post("/signup",async(req,res)=>{
         const hashedpwd=await bcrypt.hash(pwd,10);
         
         const { UserName,password,email,address,phone } = req.body;
-        const duplicate=User.findOne({UserName:UserName})
+        const duplicate=User.findOne({email:email})
 if(!duplicate){
   const newUser = new User({
     UserName,
@@ -36,12 +36,11 @@ if(!duplicate){
     res.send("Newuser is created")
   })
   .catch((err) => {
-    //console.log(err, "error has occur");
     res.send(err.message)
   });
 }
 else{
-  res.send("Try with another user name").status(401)
+  res.status(401).send("Try with another user name");
 }
     }
     catch(err){
