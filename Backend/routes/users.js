@@ -20,8 +20,10 @@ routes.post("/signup",async(req,res)=>{
     try{
         const pwd=req.body.password;
         const hashedpwd=await bcrypt.hash(pwd,10);
+        
         const { UserName,password,email,address,phone } = req.body;
-
+        const duplicate=User.findOne({UserName:UserName})
+if(!duplicate){
   const newUser = new User({
     UserName,
     email,
@@ -37,13 +39,18 @@ routes.post("/signup",async(req,res)=>{
     //console.log(err, "error has occur");
     res.send(err.message)
   });
- 
+}
+else{
+  res.send("Try with another user name").status(401)
+}
     }
     catch(err){
         //console.log(err)
         res.send(err.message)
     }
+
 })
+
 
 
 
@@ -53,13 +60,12 @@ routes.post("/login",async(req,res)=>{
 
 try{
   const { email,password}=req.body;
-  console.log(password);
   if(!email || !password){
     return res.status(400).json({ 'message': 'email and password are required.' })
   }
 
   const foundUser = await User.findOne({email:email})
-    console.log(typeof(foundUser.password))
+   
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
     // evaluate password 
     const match = await bcrypt.compare(password, foundUser.password);
@@ -68,7 +74,7 @@ try{
         //localStorage.setItem("UserData",JSON.stringify(foundUser));
         res.send(foundUser);
     } else {
-        res.sendStatus(401);
+        res.status(401).send("Password wrong");
     }
 
 }
