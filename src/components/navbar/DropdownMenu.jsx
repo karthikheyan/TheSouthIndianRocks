@@ -26,9 +26,9 @@ function DropdownMenu() {
       </button>
       {isOpen && (
         <div className="dropdown-content">
-          <Link to="">Your Account Details</Link>
-          <Link to="">Your Cart</Link>
-          <Link to="">Ordered Items</Link>
+          <Link to="/accountdetails">Your Account Details</Link>
+          <Link to="/cart">Your Cart</Link>
+          <Link to="/orders">Ordered Items</Link>
           <Link onClick={handleLogout}to="/login">Logout</Link>
         </div>
       )}
