@@ -52,13 +52,13 @@ routes.post("/signup",async(req,res)=>{
 routes.post("/login",async(req,res)=>{
 
 try{
-  const { UserName,password}=req.body;
+  const { email,password}=req.body;
   console.log(password);
-  if(!UserName || !password){
-    return res.status(400).json({ 'message': 'Username and password are required.' })
+  if(!email || !password){
+    return res.status(400).json({ 'message': 'email and password are required.' })
   }
 
-  const foundUser = await User.findOne({UserName:UserName})
+  const foundUser = await User.findOne({email:email})
     console.log(typeof(foundUser.password))
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
     // evaluate password 
