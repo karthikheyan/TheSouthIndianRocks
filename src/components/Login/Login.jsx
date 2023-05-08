@@ -33,8 +33,7 @@ function Login() {
             history('/')
           } catch (error) {
             userLogin(null)
-            console.log("hai")
-            setError(error.message)
+            setError("Invalid username or password")
             setIsPending(false)
         }
 
@@ -65,6 +64,8 @@ function Login() {
         <button type="submit">Login</button>
         <p>Not a user? </p>
         <Link to="/signup">Signup</Link>
+
+        {error && <p>{error}</p>}
       </form>
     </div>
   );
