@@ -23,16 +23,13 @@ function Signup() {
 
       setAddress({city,street,state})
       setIsPending(true)
-      console.log('address',address)
       const signupData = {
           UserName: user,
           password,
           email,
           address,
           phone,
-
       }
-      console.log(signupData)
       try {
           const res = await fetch('http://localhost:3000/tsir/users/signup',{
               method: 'POST',
@@ -42,9 +39,11 @@ function Signup() {
               body: JSON.stringify(signupData)
           })
           const data = await res.json();
+          setError(null)
           userLogin(data.UserName)
+          history('/login')
+          console.log("hai");
           setIsPending(false)
-          history('/')
       } catch (error) {
           setError(error.message)
           setIsPending(false)
@@ -109,6 +108,7 @@ function Signup() {
         <button type="submit">Sign Up</button>
         <p>Already a user?</p>
         <Link className="" to="/login">Login</Link>
+        {error && <p>{error}</p>}
       </form>
     </div>
   );

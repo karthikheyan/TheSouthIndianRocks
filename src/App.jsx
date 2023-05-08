@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           {!user && <Route path='/login' element={<Login/>}></Route>}
-          <Route path='/signup' element={<Signup/>}></Route>
+          {!user && <Route path='/signup' element={<Signup/>}></Route>}
           <Route path='/products' element={<Products/>}></Route>
           <Route path='/types/:category' element={<Types/>}></Route>
           <Route path='/productslist/:type' element={<ProductsList/>}></Route>

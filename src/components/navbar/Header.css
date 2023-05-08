@@ -1,7 +1,7 @@
 .navbar{
     background-color: #14213d;
     color: white;
-    height: 70px;
+    height: 80px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -25,20 +25,22 @@
 }
 
 .navbar-middle{
+    margin-left: 20%;
     display: flex;
     flex-direction: row;
     text-align: center;
+
 }
 .navbar-middle button{
     color: white;
     border: solid 0px;
     background-color: #fca311;
     padding: 10px 25px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     border-bottom: 3px solid #14213d;
-
 }
+
 .navbar-middle .home-button{
     background-color: white;
     color: black;
@@ -60,10 +62,8 @@
     background-color: white;
     color: black;
 }
-.navbar-middle .login-button{
-    background-color: white;
-    color: black;
-}
+
+
 
 
 .navbar-middle button:hover{
