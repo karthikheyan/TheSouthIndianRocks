@@ -24,6 +24,7 @@ routes.get('/product/:id',async(req,res)=>{
     }
     catch(err){
         console.log(err);
+
     }
 })
 
@@ -36,17 +37,16 @@ routes.post('/addtocart/:uid/:pid',async(req,res)=>{
         if(user){
 
                 console.log("User's cart array updated successfully")
-                 res.status(200)
+                 res.status(200).send("item added to cart")
             } else {
                 res.status(404)
               
           }
-          res.send("ok")
     }
 
     catch(err){
         console.log(err)
-        res.status(400)
+        res.send(err)
     }
 })
 
@@ -54,10 +54,18 @@ routes.post('/addtocart/:uid/:pid',async(req,res)=>{
 
 routes.get("/cart/:uid",async(req,res)=>{
     try{
-             
-    }
+           const user=await User.find({"_id":req.params.uid})
+           const product_array=user[0].cart;
+           const id_array=[];
+          
+           for (const id of product_array) {
+                  const product_details = await Product.findOne({ "_id": id });
+                  id_array.push(product_details);
+           }
+            res.send(id_array)
+}
     catch(err){
-
+      res.send(err)
     }
 })
 
