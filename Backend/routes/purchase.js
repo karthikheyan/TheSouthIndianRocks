@@ -28,7 +28,7 @@ routes.get('/product/:id',async(req,res)=>{
     }
 })
 
-
+//request to add product to cart
 routes.post('/addtocart/:uid/:pid',async(req,res)=>{
     try{
         const user_id=req.params.uid
@@ -51,7 +51,7 @@ routes.post('/addtocart/:uid/:pid',async(req,res)=>{
 })
 
 
-
+//to provide cart products
 routes.get("/cart/:uid",async(req,res)=>{
     try{
            const user=await User.find({"_id":req.params.uid})
@@ -65,8 +65,28 @@ routes.get("/cart/:uid",async(req,res)=>{
             res.send(id_array)
 }
     catch(err){
+        console.log(err);
       res.send(err)
     }
+})
+
+
+//to remove item from cart
+
+routes.delete("/cart/remove/:uid",async(req,res)=>{
+      try{
+        const productIds=req.body.productIds;
+       const user=await User.findById(req.params.uid)
+       console.log(productIds+" "+user)
+       if(!user)return res.status(404).json({message:"user not found"})
+       user.cart = user.cart.filter(productId => !productIds.includes(productId));
+       await user.save();
+        res.status(200).json({message:"product ids deleted"})
+       
+      }catch(err){
+             console.log(err);
+             res.send(err)
+      }
 })
 
 module.exports=routes
