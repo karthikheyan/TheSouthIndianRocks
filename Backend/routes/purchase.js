@@ -15,7 +15,6 @@ const Purchase = require("../models/purchased")
 const purchased = require("../models/purchased")
 
 
-
 routes.get('/product/:id',async(req,res)=>{
     try{
         const purchased=await Product.find({_id:req.params.id});
@@ -33,20 +32,28 @@ routes.post('/addtocart/:uid/:pid',async(req,res)=>{
     try{
         const user_id=req.params.uid
         const product_id=req.params.pid
-        const user=await User.findByIdAndUpdate(user_id,{$push:{cart:product_id}},{new:true})
-        if(user){
+        const find = await User.findById(user_id)
+        const cartarr = find.cart
+        if(cartarr.includes(product_id))
+        {
+            return res.status(409).json({error: "Item is already added"})
+        }
+        else{
 
-                console.log("User's cart array updated successfully")
-                 res.status(200).send("item added to cart")
-            } else {
-                res.status(404)
-              
-          }
+            const user = await User.findByIdAndUpdate(user_id,{$push:{cart:product_id}},{new:true})
+            if(user){
+                    console.log("User's cart array updated successfully")
+                     res.status(200).json({message: "item added to cart"})
+                } else {
+                    res.status(404)
+                  
+              }
+        }
     }
 
     catch(err){
         console.log(err)
-        res.send(err)
+        res.status(404).send(err)
     }
 })
 
@@ -73,15 +80,14 @@ routes.get("/cart/:uid",async(req,res)=>{
 
 //to remove item from cart
 
-routes.delete("/cart/remove/:uid",async(req,res)=>{
+routes.patch("/cart/remove/:uid",async(req,res)=>{
       try{
-        const productIds=req.body.productIds;
-       const user=await User.findById(req.params.uid)
-       console.log(productIds+" "+user)
-       if(!user)return res.status(404).json({message:"user not found"})
-       user.cart = user.cart.filter(productId => !productIds.includes(productId));
-       await user.save();
-        res.status(200).json({message:"product ids deleted"})
+            const productIds = req.body.productIds;
+            const user = await User.findById(req.params.uid)
+            if(!user) return res.status(404).json({error:"user not found"})
+            user.cart = await user.cart.filter(productId => !productIds.includes(productId));
+            await user.save();
+            res.status(200).send(user.cart)
        
       }catch(err){
              console.log(err);

@@ -1,9 +1,11 @@
-import { createContext, useReducer} from "react";
+import { createContext, useReducer, useEffect} from "react";
 
 export const UserContext = createContext();
 
 const userReducer = (state, action)=> {
     switch(action.type){
+        case "LOGIN_1":
+            return {userDetails: action.payload, user: action.payload.UserName}
         case "LOGIN":
             return {userDetails: action.payload, user:action.payload.UserName}
         case "LOGOUT":
@@ -13,11 +15,25 @@ const userReducer = (state, action)=> {
     }
 }
 
-export function UserProvider({ children }){
+export function UserProvider({ children }){ 
+
     const [state, dispatch] = useReducer(userReducer,{
-        user: null,
-        userData: null,
+        user:null,
+        userDetails:null,
     })
+
+    useEffect(() => {
+        const storedUserDetails = localStorage.getItem('userDetails');
+        if (storedUserDetails) {
+            const tempObject = JSON.parse(storedUserDetails)
+            console.log(tempObject)
+          dispatch({
+            type: 'LOGIN_1',
+            payload: tempObject,
+          });
+        }
+      }, []);
+
     const userLogin = (userDetails)=>{
         dispatch({type:'LOGIN',payload: userDetails})
     }

@@ -147,7 +147,7 @@ const upload_product= multer({
   }
 });
 
-  routes.post("/product ", upload_product.single("productImage"),async (req, res) => {
+  routes.post("/product", upload_product.single("productImage"),async (req, res) => {
     try{
       const url = req.protocol + '://' + req.get('host')
     const category=req.body.category;

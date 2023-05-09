@@ -29,6 +29,7 @@ function Login() {
             })
             const data = await res.json();
             userLogin(data)
+            localStorage.setItem('userDetails',JSON.stringify(data));
             setIsPending(false)
             history('/')
           } catch (error) {

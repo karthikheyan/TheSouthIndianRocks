@@ -14,6 +14,7 @@ function DropdownMenu() {
   const navigate = useNavigate();
   const {user,userLogout} = useUserContext();
   const handleLogout = ()=>{
+    localStorage.removeItem("userDetails");
     userLogout(null);
     navigate('/login')
   }

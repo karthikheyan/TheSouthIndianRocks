@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom';
-import './ProductsList.css'
+import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../../Context/useUserContext';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './ProductsList.css'
+
+
 const ProductsList = () => {
   const params = useParams();
-  let [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState([]);
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false);
   const {userDetails} = useUserContext();
 
-  //tsir/purchase/addtocart/{userid}/{productid}
   const addToCart = async (pid)=>{
     try {
       const res = await fetch(`http://localhost:3000/tsir/purchase/addtocart/${userDetails._id}/${pid}`,{
@@ -19,9 +23,21 @@ const ProductsList = () => {
           },
       })
       const data = await res.json();
-      console.log(data);
+      if(data.error){
+        const message = "Item is already in cart"
+        toast.error(message,{
+          position: toast.POSITION.TOP_LEFT,
+          toastId: message
+        })
+      }
+      else{
+        toast.success("Item added to cart",{
+          position: toast.POSITION.TOP_LEFT
+        })
+      }
       setIsPending(false)
     } catch (error) {
+      console.log(error)
       setError("Error in adding to cart");
       setIsPending(false);
   }
@@ -56,7 +72,7 @@ const ProductsList = () => {
                         <p>{product.description}</p>
                         <h4>PRICE: {product.price}/piece</h4>
                         <p>Ratings: {product.rating}</p>
-                        <button onClick={addToCart(product._id)}>Order now</button>
+                        <button onClick={()=>addToCart(product._id)}>Add to cart</button>
                     </div>
                     )
           }

@@ -35,13 +35,6 @@ const AddProducts = () => {
       });
   }
 
-  const handleCnameSelect = (e)=>{
-    setCname(e.target.value);
-  }
-  const handleTnameSelect = (e)=>{
-    setTname(e.target.value)
-  }
-
   function handleFileChange(event) {
     setProductImage(event.target.files[0]);
   }
