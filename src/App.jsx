@@ -14,7 +14,6 @@ import Purchase from './components/Products/Purchase';
 import ProductsList from './components/Products/Types/ProductsList/ProductsList';
 import Types from './components/Products/Types/Types';
 import Signup from './components/Signup/Signup';
-import AccountDetails from './components/User/AccountDetails';
 import Cart from './components/User/Cart';
 import OrderDetails from './components/User/OrderDetails';
 import Footer from './components/navbar/Footer'
@@ -35,7 +34,6 @@ function App() {
             <>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/orders' element={<OrderDetails/>}></Route>
-            <Route path='/accountdetails' element={<AccountDetails/>}></Route>
             </>
           )
           }

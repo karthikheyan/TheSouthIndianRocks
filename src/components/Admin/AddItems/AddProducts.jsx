@@ -4,7 +4,7 @@ const AddProducts = () => {
   const [cname, setCname] = useState("");
   const [tname, setTname] = useState('');
   const [pname, setPname] = useState('');
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState('');
   const [description, setDescription] = useState("");
   const [productImage, setProductImage] = useState(null);
 
@@ -58,13 +58,15 @@ const AddProducts = () => {
     }, [])
 
   useEffect(()=>{
-    fetch(`http://localhost:3000/tsir/category/type/${cname}`)
-    .then((resp)=>resp.json())
-    .then((d)=>{
-        setTypes(d);
-        setTname(d[0].tname)
-        console.log(tname)
-    });
+    if(cname){
+      fetch(`http://localhost:3000/tsir/category/type/${cname}`)
+      .then((resp)=>resp.json())
+      .then((d)=>{
+          setTypes(d);
+          setTname(d[0].tname)
+          console.log(tname)
+      });
+    }
   },[cname])
 
 

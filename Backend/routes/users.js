@@ -24,7 +24,7 @@ routes.post("/signup",async(req,res)=>{
         const { UserName,password,email,address,phone } = req.body;
         const duplicate=await User.find({email:email})
         console.log(duplicate)
-        if (duplicate.length>=1) return res.status(409).json({ 'Fail': `Mail already used!` });
+        if (duplicate.length>=1) return res.sendStatus(401);
 
   const newUser = new User({
     UserName,
