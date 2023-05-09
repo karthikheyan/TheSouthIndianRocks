@@ -1,11 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom';
 import './ProductsList.css'
+import { useUserContext } from '../../../Context/useUserContext';
 const ProductsList = () => {
   const params = useParams();
   let [productList, setProductList] = useState([]);
   const [error, setError] = useState(null)
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
+  const {userDetails} = useUserContext();
+
+  //tsir/purchase/addtocart/{userid}/{productid}
+  const addToCart = async (pid)=>{
+    try {
+      const res = await fetch(`http://localhost:3000/tsir/purchase/addtocart/${userDetails._id}/${pid}`,{
+          method: 'POST',
+          headers: {
+              'Content-Type':'application/json'
+          },
+      })
+      const data = await res.json();
+      console.log(data);
+      setIsPending(false)
+    } catch (error) {
+      setError("Error in adding to cart");
+      setIsPending(false);
+  }
+  }
 
   useEffect(() => {
     setIsPending(true)
@@ -30,16 +50,15 @@ const ProductsList = () => {
             <>
               {productList ? productList.map((product)=>{
                 return(
-                <Link key={product._id} to="/purchase">
-                    <div className="products-list-grid-box">
+                    <div key={product._id} className="products-list-grid-box">
                         <h3>{product.pname}</h3>
                         <img src={product.img} alt="image"/>
                         <p>{product.description}</p>
                         <h4>PRICE: {product.price}/piece</h4>
                         <p>Ratings: {product.rating}</p>
-                        <button>Order now</button>
+                        <button onClick={addToCart(product._id)}>Order now</button>
                     </div>
-                </Link>)
+                    )
           }
           ):<div>No Products to display</div>}
             </>

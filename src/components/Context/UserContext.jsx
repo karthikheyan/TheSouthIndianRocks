@@ -5,9 +5,9 @@ export const UserContext = createContext();
 const userReducer = (state, action)=> {
     switch(action.type){
         case "LOGIN":
-            return {user:action.payload}
+            return {userDetails: action.payload, user:action.payload.UserName}
         case "LOGOUT":
-            return {user:action.payload}
+            return {userDetails: null, user:null}
         default:
             return state;
     }
@@ -16,15 +16,16 @@ const userReducer = (state, action)=> {
 export function UserProvider({ children }){
     const [state, dispatch] = useReducer(userReducer,{
         user: null,
+        userData: null,
     })
-    const userLogin = (user)=>{
-        dispatch({type:'LOGIN',payload: user})
+    const userLogin = (userDetails)=>{
+        dispatch({type:'LOGIN',payload: userDetails})
     }
     const userLogout = (user)=>{
         dispatch({type:'LOGOUT',payload: null})
     }
-    console.log(state);
 
+    console.log(state);
     return (
             <UserContext.Provider value={{...state, userLogin, userLogout}}>
                 {children}

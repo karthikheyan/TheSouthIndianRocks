@@ -10,7 +10,7 @@ function Login() {
     const [error, setError] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {userLogin}= useUserContext();
+    const { userLogin }= useUserContext();
     const handleSubmit = async (e)=> {
         e.preventDefault();
 
@@ -28,7 +28,7 @@ function Login() {
                 body: JSON.stringify(loginData)
             })
             const data = await res.json();
-            userLogin(data.UserName)
+            userLogin(data)
             setIsPending(false)
             history('/')
           } catch (error) {

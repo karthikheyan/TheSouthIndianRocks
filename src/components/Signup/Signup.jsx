@@ -29,7 +29,7 @@ function Signup() {
           email,
           address,
           phone,
-      }
+        }
       try {
           const res = await fetch('http://localhost:3000/tsir/users/signup',{
               method: 'POST',
@@ -41,12 +41,12 @@ function Signup() {
           const data = await res.json();
           setError(null)
           userLogin(data.UserName)
+          console.log(data.UserName)
           history('/login')
-          console.log("hai");
           setIsPending(false)
-      } catch (error) {
-          setError(error.message)
-          setIsPending(false)
+        } catch (error) {
+          setError("Email already exists");
+          setIsPending(false);
       }
 
    }
