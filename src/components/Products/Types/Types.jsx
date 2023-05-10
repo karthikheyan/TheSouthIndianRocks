@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link} from 'react-router-dom'
 import './Types.css'
+import Loading from '../../Home/Loading';
 const Types = () => {
   const params = useParams();
   const [error, setError] = useState(null)
@@ -41,7 +42,7 @@ const Types = () => {
         }
         ):<div>No categories to display</div>}
           </>
-        ): <></>: <p>Loading.......</p>}
+        ): <></>: <Loading/>}
       </div>
     </div>
   )

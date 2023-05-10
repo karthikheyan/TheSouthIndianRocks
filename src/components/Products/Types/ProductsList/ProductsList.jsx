@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './ProductsList.css'
+import Loading from '../../../Home/Loading';
 
 
 const ProductsList = () => {
@@ -78,7 +79,7 @@ const ProductsList = () => {
           }
           ):<div>No Products to display</div>}
             </>
-          ): <></>: <p>Loading.......</p>}
+          ): <></>: <Loading/>}
         </div>
     </div>
   )

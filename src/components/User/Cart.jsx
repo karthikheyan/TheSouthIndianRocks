@@ -1,9 +1,12 @@
 import React, { useState, useEffect} from "react";
 import "./Cart.css";
 import { useUserContext } from "../Context/useUserContext";
+import Loading from "../Home/Loading";
 
 const Cart = () => {
 
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [cartSize, setCartSize] = useState(cartItems.length)
   const {userDetails} = useUserContext();
@@ -12,6 +15,7 @@ const Cart = () => {
   );
 
   useEffect(()=>{
+    setIsPending(true);
     fetch(`http://localhost:3000/tsir/purchase/cart/${userDetails._id}`)
     .then((res)=>res.json())
     .then((data)=>{
@@ -20,9 +24,10 @@ const Cart = () => {
       {
         data[i].quantity = 1;
       }
+      setIsPending(false)
     })
     .catch((err)=>{
-      console.log(err)
+      setError(err)
     })
   },[cartSize])
 
@@ -58,6 +63,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
+      {isPending && <Loading/>}
       <h2>Your Cart</h2>
       {cartItems.length === 0 && <p>Your cart is empty.</p>}
       {cartItems.map((item) => (
