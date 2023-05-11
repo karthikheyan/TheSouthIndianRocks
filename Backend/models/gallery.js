@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 
 const gallerySchema=mongoose.Schema({
-    imgage:{
+    image:{
         type:String,
         require:true
     }

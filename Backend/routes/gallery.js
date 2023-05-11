@@ -12,6 +12,7 @@ const User = require("../models/users")
 const app=express()
 const bcrypt=require("bcrypt")
 const { json } = require("body-parser")
+const path=require("path")
 
 
 
@@ -50,12 +51,13 @@ const image_storage = multer.diskStorage({
       });
       saveImage
         .save()
-        .then((res) => {
+        .then((resp) => {
           console.log("Image is saved");
           res.send('Image is saved')
         })
         .catch((err) => {
           console.log(err, "error has occur");
+          res.send(err)
         });
         
     });
@@ -63,9 +65,19 @@ const image_storage = multer.diskStorage({
 
 
 //get images from gallery
-routes.get("/image",async(req,res)=>{
+routes.get("/images",async(req,res)=>{
     try{
         const images=await Gallery.find()
+        res.status(200).send(images)
+    }
+    catch{
+        console.log(err)
+        res.status(404).send(err)
+    }
+})
+routes.delete("/images",async(req,res)=>{
+    try{
+        const images=await Gallery.deleteMany()
         res.status(200).send(images)
     }
     catch{
