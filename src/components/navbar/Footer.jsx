@@ -26,7 +26,7 @@ const Footer = () => {
             <div className="four">
                 <h3>ADDRESS</h3>
                 <p>GOBICHETTIPALAYAM, PAPPIREDDIPATTI(TK), DHARMAPURI(DT). 91+9566906913.
-                   Email:thesouthindianrocks@gmail.com</p>
+                   Email:<br></br>thesouthindianrocks@gmail.com</p>
             </div>
     </nav>
   )

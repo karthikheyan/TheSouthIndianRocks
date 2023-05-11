@@ -34,6 +34,11 @@ const Header = () => {
                     <Link to={'/login'}><button className={pathname==="/login" ? 'login-button': ''}>LOGIN</button></Link>
                   )
                   }
+                  <div className="bar">
+                <span className="material-symbols-outlined">
+                    menu
+                    </span>
+                </div>
                   </div>
             </div>
         </nav>

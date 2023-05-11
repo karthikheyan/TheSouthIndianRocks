@@ -14,7 +14,7 @@ const Home = () => {
         <>
         <div className="services">
             <h2>Our Services</h2>
-            <p>The services by the South Indian Rocks including these</p>
+            <p className='p'>The services by the South Indian Rocks including these</p>
             <div className="services-grid">
                 <div className="services-grid-box">
                     <img src= {cuttingImage} alt=""/>

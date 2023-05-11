@@ -30,6 +30,7 @@ const Products = () => {
                 <>
                 <h2>Our Products</h2>
                 <p>The products produced by the South Indian Rocks including these</p>
+                <div className='grid'>
                 <div className='products-grid'>
                   {categories ? categories.map((category)=>{
                         return(<Link key={category._id} to={`/types/${category.cname}`}>
@@ -41,6 +42,7 @@ const Products = () => {
                         </Link>)
                   }
                   ):<div>No categories to display</div>}
+                    </div>
                     </div>
               </>
       ): <></>: <Loading/>}
