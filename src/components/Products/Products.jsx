@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './Products.css'
-import Loading from '../Loading';
+import Loading from '../Home/Loading';
 const Products = () => {
 
   const [error, setError] = useState(null)

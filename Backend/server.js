@@ -4,10 +4,14 @@ const mongoose=require('mongoose')
 const dotenv=require("dotenv")
 const bodyParser = require("body-parser");
 const cors=require("cors")
+const compression = require("compression")
+
+app.use(compression());
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json())
 dotenv.config()
 app.use(cors())
+
 
 mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log("Db connected")
@@ -21,7 +25,6 @@ app.use('/uploads/products', express.static('uploads/products'));
 app.use('/tsir',require("./routes/tsir.js"))
 app.use('/tsir/users',require("./routes/users.js"))
 app.use('/tsir/purchase',require("./routes/purchase.js"))
-
 
 app.listen(3000,()=>{
     console.log("connected")

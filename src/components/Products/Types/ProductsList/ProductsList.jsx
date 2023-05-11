@@ -1,11 +1,48 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useUserContext } from '../../../Context/useUserContext';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './ProductsList.css'
+import Loading from '../../../Home/Loading';
+
+
 const ProductsList = () => {
   const params = useParams();
-  let [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState([]);
   const [error, setError] = useState(null)
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
+  const {userDetails} = useUserContext();
+
+  const addToCart = async (pid)=>{
+    try {
+      const res = await fetch(`http://localhost:3000/tsir/purchase/addtocart/${userDetails._id}/${pid}`,{
+          method: 'POST',
+          headers: {
+              'Content-Type':'application/json'
+          },
+      })
+      const data = await res.json();
+      if(data.error){
+        const message = "Item is already in cart"
+        toast.error(message,{
+          position: toast.POSITION.TOP_LEFT,
+          toastId: message
+        })
+      }
+      else{
+        toast.success("Item added to cart",{
+          position: toast.POSITION.TOP_LEFT
+        })
+      }
+      setIsPending(false)
+    } catch (error) {
+      console.log(error)
+      setError("Error in adding to cart");
+      setIsPending(false);
+  }
+  }
 
   useEffect(() => {
     setIsPending(true)
@@ -30,20 +67,19 @@ const ProductsList = () => {
             <>
               {productList ? productList.map((product)=>{
                 return(
-                <Link key={product._id} to="/purchase">
-                    <div className="products-list-grid-box">
+                    <div key={product._id} className="products-list-grid-box">
                         <h3>{product.pname}</h3>
                         <img src={product.img} alt="image"/>
                         <p>{product.description}</p>
                         <h4>PRICE: {product.price}/piece</h4>
                         <p>Ratings: {product.rating}</p>
-                        <button>Order now</button>
+                        <button onClick={()=>addToCart(product._id)}>Add to cart</button>
                     </div>
-                </Link>)
+                    )
           }
           ):<div>No Products to display</div>}
             </>
-          ): <></>: <p>Loading.......</p>}
+          ): <></>: <Loading/>}
         </div>
     </div>
   )

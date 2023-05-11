@@ -32,7 +32,7 @@ const userSchema=mongoose.Schema({
         ref: 'Purchase'
       }],
       cart:[{
-        type:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.Object,
         ref: 'Product'
       }]
 })
