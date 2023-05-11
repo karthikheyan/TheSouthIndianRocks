@@ -11,8 +11,9 @@ const User = require("../models/users")
 const app=express()
 const bcrypt=require("bcrypt")
 const { json } = require("body-parser")
-const Purchase = require("../models/purchased")
-const purchased = require("../models/purchased")
+//const Purchase = require("../models/purchased")
+const Purchased = require("../models/purchased")
+const product = require("../models/product")
 
 
 routes.get('/product/:id',async(req,res)=>{
@@ -97,5 +98,38 @@ routes.patch("/cart/remove/:uid",async(req,res)=>{
 
 
 //Update user after purchasing the products
+
+routes.post("/completed/:uid",async(req,res)=>{
+try{
+      const products=req.body.Products
+    
+      const user = await User.findById(req.params.uid)
+   //   const userId=user._id;
+   if (!user.purchased) {
+    user.purchased = [];
+  }
+      for(const product of products){
+        console.log(product.quantity);
+        const purchase= new Purchased({
+            userId:user._id,
+            productId:product.productId,
+            quantity:product.quantity,
+            totalPrice:product.quantity*product.price
+            })
+            await purchase.save()
+            user.purchased.push(purchase._id)
+         
+        }
+        await user.save()
+    
+      res.status(200).json({ message: "Purchase history updated successfully" });
+}
+catch(err){
+    console.log(err)
+    res.status(500).json({ error: err.message });
+}
+})
+
+
 
 module.exports=routes

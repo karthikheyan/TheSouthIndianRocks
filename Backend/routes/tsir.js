@@ -251,6 +251,26 @@ console.log();
 })
 
 
+
+//delete category
+
+routes.delete("/deletecategory/:id",async(req,res)=>{
+     try{
+           
+           const product=await Product.deleteMany({category_id:req.params.id})
+           const type=await ProductType.deleteMany({category_id:req.params.id})
+           await Category.deleteOne({_id:req.params.id})
+
+           res.send("yes")
+     }
+     catch(err){
+res.send(err)
+     }
+})
+
+
+
+
 // routes.get("/gallery",async(req,res)=>{
 //   try{
 //     const products= await Product.find()
