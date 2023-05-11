@@ -17,5 +17,5 @@ const purchaseSchema=mongoose.Schema({
       }
 })
 
-const Purchase=mongoose.model("Purchase",purchaseSchema)
+const Purchase=mongoose.model("PurchaseHistory",purchaseSchema)
 module.exports=Purchase;

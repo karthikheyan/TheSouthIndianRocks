@@ -41,7 +41,7 @@ const image_storage = multer.diskStorage({
     }
   });
     
-    routes.post("/category", upload_image.single("categoryImage"), (req, res) => {
+    routes.post("/image", upload_image.single("galleryImage"), (req, res) => {
       const url = req.protocol + '://' + req.get('host')
       const saveImage =  Gallery({
        
@@ -51,18 +51,19 @@ const image_storage = multer.diskStorage({
       saveImage
         .save()
         .then((res) => {
-          console.log("category image is saved");
+          console.log("Image is saved");
+          res.send('Image is saved')
         })
         .catch((err) => {
           console.log(err, "error has occur");
         });
-        res.send('category image is saved')
+        
     });
   
 
 
 //get images from gallery
-routes.get("/gallery/image",async(req,res)=>{
+routes.get("/image",async(req,res)=>{
     try{
         const images=await Gallery.find()
         res.status(200).send(images)
@@ -72,3 +73,6 @@ routes.get("/gallery/image",async(req,res)=>{
         res.status(404).send(err)
     }
 })
+
+
+module.exports=routes

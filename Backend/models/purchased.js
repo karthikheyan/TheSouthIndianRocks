@@ -15,8 +15,8 @@ const purchaseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  rating:{
-       type:Number
+  isdeleivered:{
+       type:Boolean
   }
 });
 

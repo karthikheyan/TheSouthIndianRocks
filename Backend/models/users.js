@@ -27,9 +27,9 @@ const userSchema=mongoose.Schema({
         type: Date,
         default: Date.now
       },
-      purchases: [{
+      purchasesHistory: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Purchase'
+        ref: 'PurchaseHistory'
       }],
       cart:[{
         type:mongoose.Schema.Types.Object,
