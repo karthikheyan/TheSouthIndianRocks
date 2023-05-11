@@ -100,7 +100,7 @@ const Cart = () => {
     <Link 
     to={{
         pathname:'/checkout',
-        state: total 
+        state: {total}
     }}
     >
         <button>
