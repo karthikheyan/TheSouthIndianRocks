@@ -95,4 +95,7 @@ routes.patch("/cart/remove/:uid",async(req,res)=>{
       }
 })
 
+
+//Update user after purchasing the products
+
 module.exports=routes
