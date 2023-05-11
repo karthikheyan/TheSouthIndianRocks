@@ -1,6 +1,7 @@
 import './App.css'
 import About from './components/About us/About';
 import AddCategory from './components/Admin/AddItems/AddCategory';
+import AddGalleryImage from './components/Admin/AddItems/AddGalleryImage';
 import AddProducts from './components/Admin/AddItems/AddProducts';
 import AddType from './components/Admin/AddItems/AddType';
 import Admin from './components/Admin/Admin';
@@ -49,6 +50,7 @@ function App() {
           <Route path='/admin/addcategory' element={<AddCategory/>}></Route>
           <Route path='/admin/addtype' element={<AddType/>}></Route>
           <Route path='/admin/addproduct' element={<AddProducts/>}></Route>
+          <Route path='/admin/addgalleryimages' element={<AddGalleryImage/>}></Route>
           <Route path='/purchase' element={<Purchase/>}></Route>
           <Route path="*" element={<Home/>}></Route>
         </Routes>
