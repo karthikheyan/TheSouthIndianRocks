@@ -26,7 +26,7 @@
 .products-grid{
     display: grid;
     margin-left:23vw;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     row-gap: 50px;
 }
 .products-grid-box{
@@ -302,10 +302,9 @@
     }
   }
   @media all and (max-width:430px){
-    .services-grid,.reviews-grid{
-        margin-left:0px;
+    .services-grid{
+        grid-template-columns: 1fr;
     }
-    
   }
   @media all and (max-width:400px){
     .services-grid{
