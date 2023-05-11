@@ -4,6 +4,9 @@ const mongoose=require('mongoose')
 const dotenv=require("dotenv")
 const bodyParser = require("body-parser");
 const cors=require("cors")
+const compression = require("compression")
+
+app.use(compression());
 app.use(express.urlencoded({extended:true}));
 app.use(bodyParser.json())
 dotenv.config()
