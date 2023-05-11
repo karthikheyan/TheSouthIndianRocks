@@ -101,6 +101,7 @@ const Cart = () => {
     to={{
         pathname:'/checkout',
         state: total 
+        
     }}
     >
         <button>
