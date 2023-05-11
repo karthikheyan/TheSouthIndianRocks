@@ -93,11 +93,9 @@
 
 /* media query for tab  */
 @media screen and (max-width:822px){
-    .slideshow-container{
-        width:820px;
-    }
+    
     .navbar{
-        width: 818px;
+        width: 100vw;
     }
     .navbar-middle{
         display: flex;
@@ -127,13 +125,18 @@
         margin-top: 0px;
     }
 }
+@media all and (max-width:770px){
+    .navbar{
+        width:100vw;
+    }
+}
 
   /* media query for mobile*/
   @media screen and (max-width:482px){
     
     .navbar{
        width: 100vw;
-        margin-right: 0px;
+    margin-right: 0px;
     }
     .navbar-middle{
         display: none;
@@ -266,6 +269,11 @@
     .slideshow-container{
         margin-left: 1vw;
         width:98vw;
+    }
+  }
+  @media all and (max-width:770px){
+    .navbar{
+        width:100vw;
     }
   }
   @media all and (max-width:752px){

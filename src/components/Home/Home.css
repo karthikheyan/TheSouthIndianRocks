@@ -65,7 +65,7 @@
     margin-bottom: 50px;
     padding: 30px 50px;
     background-color: #14213d;
-    height: 300px;
+    height: 50vh;
     display: flex;
     align-items: center;
     text-overflow: clip;
@@ -116,10 +116,10 @@
 }
 @media screen and (max-width:822px){
     .slideshow-container{
-        width:820px;
+        width:100vw;
     }
     .navbar{
-        width: 818px;
+        width: 100vw;
     }
     .navbar-middle{
         display: flex;
@@ -131,6 +131,9 @@
     .services-grid{
         margin-left: 0px;
         gap:20px;
+    }
+    .services .p{
+        width:100vw;
     }
     .foot{
         display: flex;
@@ -147,6 +150,9 @@
     }
     .one{
         margin-top: 0px;
+    }
+    .reviews{
+        width:100vw;
     }
 }
 
@@ -360,6 +366,7 @@
   @media all and (max-width:430px){
     .services-grid,.reviews-grid{
         margin-left:0px;
+        grid-template-columns: 1fr;
     }
     
   }
@@ -368,6 +375,27 @@
         grid-template-columns: auto; 
         margin-left:5vw;       
     }
-    
+    .manufacture{
+        min-height:100vh;
+    }
+    .reviews{
+        width:90vw;
+        height:100vh;
+    }
+
+  }
+
+  @media all and (max-width:321px){
+    .services-grid{
+        grid-template-columns: auto; 
+        margin-left:5vw;       
+    }
+    .manufacture{
+        height:100vh;
+    }
+    .reviews{
+        height:100vh;
+    }
+
   }
   
