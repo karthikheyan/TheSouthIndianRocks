@@ -15,6 +15,7 @@ import ProductsList from './components/Products/Types/ProductsList/ProductsList'
 import Types from './components/Products/Types/Types';
 import Signup from './components/Signup/Signup';
 import Cart from './components/User/Cart';
+import Checkout from './components/User/Checkout';
 import OrderDetails from './components/User/OrderDetails';
 import Footer from './components/navbar/Footer'
 import Header from './components/navbar/Header'
@@ -34,6 +35,7 @@ function App() {
             <>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/orders' element={<OrderDetails/>}></Route>
+            <Route path='/checkout' element={<Checkout/>}></Route>
             </>
           )
           }

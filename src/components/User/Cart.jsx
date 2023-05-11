@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import "./Cart.css";
 import { useUserContext } from "../Context/useUserContext";
 import Loading from "../Home/Loading";
@@ -96,6 +97,16 @@ const Cart = () => {
           <p>Total: ${total}</p>
         </div>
       )}
+    <Link 
+    to={{
+        pathname:'/checkout',
+        state: total 
+    }}
+    >
+        <button>
+        proceed to checkout
+        </button>
+    </Link>
     </div>
   );
 }
