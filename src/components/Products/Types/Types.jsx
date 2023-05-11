@@ -23,16 +23,16 @@ const Types = () => {
   }, [])
 
   return (
-    <div className='types'>
+    <div className='products'>
         <h2>The types in {params.category} category</h2>
-      <div className='types-grid'>
+      <div className='products-grid'>
         {error && <p>{error}</p>}
         {!isPending ? !error ? (
           <>
             {types ? types.map((type)=>{
             return(
             <Link key={type._id} to={`/productslist/${type.tname}`}>
-            <div className="types-grid-box">
+            <div className="products-grid-box">
               <h3>{type.tname}</h3>
               <img src={type.img} alt="image"/>
               <p>{type.description}</p>
