@@ -102,7 +102,7 @@ routes.patch("/cart/remove/:uid",async(req,res)=>{
 routes.post("/completed/:uid",async(req,res)=>{
 try{
       const products=req.body.Products
-    
+      console.log(products)
       const user = await User.findById(req.params.uid)
    //   const userId=user._id;
    if (!user.purchased) {
