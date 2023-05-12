@@ -138,16 +138,17 @@ const Cart = () => {
           <p>Total: ${total}</p>
         </div>
       )}
-    <Link 
-    to={{
-        pathname:'/checkout',
-        state: {total}
-    }}
-    >
-        <button>
-        proceed to checkout
-        </button>
-    </Link>
+      {cartItems.length > 0 &&
+      <Link 
+      to={{
+          pathname:'/checkout',
+          state: {total}
+      }}
+      >
+          <button>
+          proceed to checkout
+          </button>
+      </Link>}
     </div>
   );
 }

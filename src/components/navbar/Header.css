@@ -210,10 +210,6 @@ a {
     border-bottom: 3px solid #14213d;
     border-radius: 3px;
 }
-.navbar button:hover{
-    color: black;
-    background-color: #fff;
-}
 
 .navbar .home-button{
     background-color: white;

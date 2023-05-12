@@ -1,5 +1,6 @@
 import { useUserContext } from '../Context/useUserContext'
 import { useEffect, useState } from 'react';
+import './OrderDetails.css'
 
 function Orders() {
   const {userDetails} = useUserContext();
@@ -9,13 +10,15 @@ function Orders() {
     async function fetchOrders() {
       const response = await fetch(`http://localhost:3000/tsir/purchase/users/${userDetails._id}`);
       const data = await response.json();
+      console.log(data)
       setOrders(data);
     }
     fetchOrders();
   }, []);
 
+
   return (
-    <div>
+    <div className='orders'>
       <h2>Orders</h2>
       <table>
         <thead>
@@ -24,7 +27,6 @@ function Orders() {
             <th>Purchase Date</th>
             <th>Quantity</th>
             <th>Total Price</th>
-            <th>User ID</th>
             <th>Is Delivered</th>
           </tr>
         </thead>
@@ -35,7 +37,6 @@ function Orders() {
               <td>{order.purchaseDate}</td>
               <td>{order.quantity}</td>
               <td>{order.totalPrice}</td>
-              <td>{order.userId}</td>
               <td>{order.isDelivered ? 'Yes' : 'No'}</td>
             </tr>
           ))}
