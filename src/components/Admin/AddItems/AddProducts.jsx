@@ -61,6 +61,12 @@ const AddProducts = () => {
       });
     }
   },[cname])
+  const handleCnameSelect = (e)=>{
+    setCname(e.target.value);
+  }
+  const handleTnameSelect = (e)=>{
+    setTname(e.target.value);
+  }
 
 
   

@@ -1,8 +1,11 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { usePurchaseContext } from "../Context/usePurchaseContext";
-
+import { useUserContext } from "../Context/useUserContext";
+import { useNavigate } from "react-router-dom";
 export default function Checkout() {
+    const navigate = useNavigate();
     const {total, cartDetails} = usePurchaseContext();
+    const {userDetails} = useUserContext();
     console.log(total, cartDetails)
 
     return (
@@ -15,7 +18,7 @@ export default function Checkout() {
                         purchase_units: [
                             {
                                 amount: {
-                                    value: total,
+                                    value: 1,
                                 },
                             },
                         ],
@@ -25,7 +28,12 @@ export default function Checkout() {
                     return actions.order.capture().then((details) => {
                         const name = details.payer.name.given_name;
                         console.log(details)
-                        alert(`Transaction completed by ${name}`);
+                        alert(`Transaction completed by ${userDetails._id}`);
+                        fetch(`http://localhost:3000/tsir/purchase/completed/${user}`,{
+                            method: "POST",
+                            body: formData,
+                        })
+                        useNavigate('/orders')
                     });
                 }}
             />

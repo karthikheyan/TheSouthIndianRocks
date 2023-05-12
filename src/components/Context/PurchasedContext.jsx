@@ -25,8 +25,6 @@ export function PurchasedProvider({ children }){
     const csetCartDetails = (cartDetails)=>{
         dispatch({type: "CARTDETAILS", payload: cartDetails})
     }
-
-    console.log(state);
     return (
             <PurchasedContext.Provider value={{...state, csetTotal, csetCartDetails}}>
                 {children}
