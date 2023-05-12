@@ -1,10 +1,28 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { usePurchaseContext } from "../Context/usePurchaseContext";
-
+import { useUserContext } from "../Context/useUserContext";
+import { useNavigate } from "react-router-dom";
+import './checkout.css'
 export default function Checkout() {
-    const {total, cartDetails} = usePurchaseContext();
-    console.log(total, cartDetails)
+    const navigate = useNavigate();
+    const {cartDetails} = usePurchaseContext();
+    const {userDetails} = useUserContext();
 
+    const handleSubmit = ()=>{
+        const cartArray = cartDetails.products
+        console.log(cartArray)
+        fetch(`http://localhost:3000/tsir/purchase/completed/${userDetails._id}`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({Products: [cartArray]}),
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            console.log(data)
+        })
+    }
     return (
         <div style={{textAlign:"center", margin: "10% auto"}}>
         <h1 style={{marginBottom: "20px"}}>Payment Gateway</h1>
@@ -15,7 +33,7 @@ export default function Checkout() {
                         purchase_units: [
                             {
                                 amount: {
-                                    value: total,
+                                    value: 1,
                                 },
                             },
                         ],
@@ -25,11 +43,17 @@ export default function Checkout() {
                     return actions.order.capture().then((details) => {
                         const name = details.payer.name.given_name;
                         console.log(details)
-                        alert(`Transaction completed by ${name}`);
+                        alert(`Transaction completed by ${userDetails._id}`);
+                        // fetch(`http://localhost:3000/tsir/purchase/completed/${user}`,{
+                        //     method: "POST",
+                        //     body: cartDetails,
+                        // })
+                        // useNavigate('/orders')
                     });
                 }}
             />
         </PayPalScriptProvider>
+        <button onClick={handleSubmit}>Submit</button>
         </div>
     );
 }
