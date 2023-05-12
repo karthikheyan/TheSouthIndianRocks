@@ -14,7 +14,7 @@ const { json } = require("body-parser")
 //const Purchase = require("../models/purchased")
 const Purchased = require("../models/purchased")
 const product = require("../models/product")
-const product = require("../models/product")
+
 
 
 routes.get('/product/:id',async(req,res)=>{
@@ -142,14 +142,14 @@ routes.get("/users/:uid", async (req, res) => {
         const purchaseHistory = [];
 
         for (const purchaseItem of purchase) {
-            const product = await Product.findById(purchaseItem.productId);
+            let pro = await Product.findById(purchaseItem.productId);
 
             // Create an object with product details and purchase information
             const purchaseDetails = {
-                productName: product.name,
+                productName: pro.pname,
                 quantity: purchaseItem.quantity,
                 totalPrice: purchaseItem.totalPrice,
-                imageUrl: product.imageUrl
+                imageUrl: pro.imageUrl
             };
 
             purchaseHistory.push(purchaseDetails);
