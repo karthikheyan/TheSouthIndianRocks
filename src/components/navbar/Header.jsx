@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import './Header.css'
 import logo from '../../images/logo.png'
 import { Link, useLocation, useNavigate} from 'react-router-dom'
@@ -8,22 +9,25 @@ import DropdownMenu from './DropdownMenu'
 const Header = () => {
   const {pathname} = useLocation();
   const navigate = useNavigate();
+  const[size,setSize]=useState(false)
   const {user,userLogout} = useUserContext();
   const handleLogout = ()=>{
     userLogout(null);
     navigate('/login')
   }
 
-  const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+//   const hamburger = document.querySelector(".hamburger");
+// const navMenu = document.querySelector(".nav-menu");
 
-hamburger.addEventListener("click", mobileMenu);
+// hamburger.addEventListener("click", mobileMenu);
 
-function mobileMenu() {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-}
-
+// function mobileMenu() {
+//     hamburger.classList.toggle("active");
+//     navMenu.classList.toggle("active");
+// }
+  const show=()=>{
+    setSize(!size);
+  }
   return (
     // <nav className="navbar">
     //         <div className="navbar-left">
@@ -60,7 +64,7 @@ function mobileMenu() {
                <img src={ logo } alt="" className="logo"></img>
                  <h1 className="title">THE SOUTH INDIAN ROCKS</h1>
              </div>
-    <ul class="nav-menu">
+    <ul className={size?"nav-menu-size":"nav-menu"}>
         <li class="nav-item">
              <Link to='/'><button className={pathname==="/" ? 'home-button' : ''}>HOME</button></Link>
         </li>
@@ -82,10 +86,10 @@ function mobileMenu() {
        </div>
         </li>
     </ul>
-    <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+    <div className="hamburger" onClick={show}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
     </div>
 </nav>
 </header>
