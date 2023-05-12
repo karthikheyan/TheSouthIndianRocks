@@ -1,7 +1,8 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+import './checkout.css'
 export default function Checkout() {
     return (
+        <div className="pay">
         <PayPalScriptProvider options={{ "client-id": "test" }}>
             <PayPalButtons
                 createOrder={(data, actions) => {
@@ -23,5 +24,6 @@ export default function Checkout() {
                 }}
             />
         </PayPalScriptProvider>
+        </div>
     );
 }
