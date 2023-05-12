@@ -82,8 +82,8 @@ const ProductsList = () => {
                         <h3>{product.pname}</h3>
                         <img src={product.img} alt="image"/>
                         <p>{product.description}</p>
-                        <h4>PRICE: {product.price}/piece</h4>
-                        <p>Ratings: {product.rating}</p>
+                        <h4 style={{marginBottom: "5px"}}>PRICE: {product.price}/piece</h4>
+                        {/* <p>Ratings: {product.rating}</p> */}
                         <button onClick={()=>addToCart(product._id)}>Add to cart</button>
                     </div>
                     )
