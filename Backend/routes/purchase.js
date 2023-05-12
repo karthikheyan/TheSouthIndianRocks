@@ -14,6 +14,7 @@ const { json } = require("body-parser")
 //const Purchase = require("../models/purchased")
 const Purchased = require("../models/purchased")
 const product = require("../models/product")
+const product = require("../models/product")
 
 
 routes.get('/product/:id',async(req,res)=>{
@@ -133,15 +134,33 @@ catch(err){
 
 
 
-routes.get("/users/:uid",async(req,res)=>{
-    try{
-      const purchase=await Purchased.find({userId:req.params.uid}) 
-      res.send(purchase)
+routes.get("/users/:uid", async (req, res) => {
+    try {
+        const purchase = await Purchased.find({ userId: req.params.uid });
+
+        // Array to store purchase history with product details
+        const purchaseHistory = [];
+
+        for (const purchaseItem of purchase) {
+            const product = await Product.findById(purchaseItem.productId);
+
+            // Create an object with product details and purchase information
+            const purchaseDetails = {
+                productName: product.name,
+                quantity: purchaseItem.quantity,
+                totalPrice: purchaseItem.totalPrice,
+                imageUrl: product.imageUrl
+            };
+
+            purchaseHistory.push(purchaseDetails);
+        }
+
+        res.send(purchaseHistory);
+    } catch (err) {
+        res.send(err);
     }
-    catch(err){
-        res.send(err)
-    }
-})
+});
+
 
 
 module.exports=routes
