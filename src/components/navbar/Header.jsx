@@ -64,6 +64,7 @@ const Header = () => {
                <img src={ logo } alt="" className="logo"></img>
                  <h1 className="title">THE SOUTH INDIAN ROCKS</h1>
              </div>
+    
     <ul className={size?"nav-menu-size":"nav-menu"}>
         <li class="nav-item">
              <Link to='/'><button className={pathname==="/" ? 'home-button' : ''}>HOME</button></Link>

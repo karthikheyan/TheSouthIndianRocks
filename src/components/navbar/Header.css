@@ -176,12 +176,11 @@ a {
 }
 .nav-menu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
 .nav-item {
-    margin-left: 5rem;
+    margin-left: 1rem;
 }
 
 .nav-link{
