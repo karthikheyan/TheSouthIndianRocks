@@ -24,8 +24,8 @@ const Header = () => {
                   <Link to='/'><button className={pathname==="/" ? 'home-button' : ''}>HOME</button></Link>
                   <Link to={'/products'}><button className={pathname==="/products" ? 'products-button': ''}>PRODUCTS</button></Link>
                   <Link to={'/gallery'}><button className={pathname==="/gallery" ? 'gallery-button': ''}>GALLERY</button></Link>
-                  {/* <Link to={'/about'}><button className={pathname==="/about" ? 'about-button': ''}>ABOUT US</button></Link>
-                  <Link to={'/contact'}><button className={pathname==="/contact" ? 'contact-button': ''}>CONTACT US</button></Link> */}
+                  {/* <Link to={'/about'}><button className={pathname==="/about" ? 'about-button': ''}>ABOUT US</button></Link> */}
+                  <Link to={'/contact'}><button className={pathname==="/contact" ? 'contact-button': ''}>CONTACT US</button></Link>
                   <div className='user-area'>
                   {user ? 
                   <DropdownMenu/>

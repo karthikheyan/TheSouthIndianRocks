@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../../Context/useUserContext';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './ProductsList.css'
@@ -14,8 +15,18 @@ const ProductsList = () => {
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false);
   const {userDetails} = useUserContext();
-
+  const navigate = useNavigate();
   const addToCart = async (pid)=>{
+    if(!userDetails){
+      const message = "You must login to continue"
+      toast.warning(message,{
+        position: toast.POSITION.TOP_LEFT,
+        toastId: message
+      })
+      navigate('/login')
+    }
+    else
+    {
     try {
       const res = await fetch(`http://localhost:3000/tsir/purchase/addtocart/${userDetails._id}/${pid}`,{
           method: 'POST',
@@ -41,7 +52,7 @@ const ProductsList = () => {
       console.log(error)
       setError("Error in adding to cart");
       setIsPending(false);
-  }
+  }}
   }
 
   useEffect(() => {
