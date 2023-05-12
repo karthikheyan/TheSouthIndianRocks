@@ -7,20 +7,20 @@ export default function Checkout() {
     const navigate = useNavigate();
     const {cartDetails} = usePurchaseContext();
     const {userDetails} = useUserContext();
-    console.log(userDetails._id)
-    console.log(cartDetails)
 
     const handleSubmit = ()=>{
-        console.log(cartDetails)
-        console.log("formdata"+formData.get("Products"))
+        const cartArray = cartDetails.products
+        console.log(cartArray)
         fetch(`http://localhost:3000/tsir/purchase/completed/${userDetails._id}`,{
             method: "POST",
-            body: cartDetails,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({Products: [cartArray]}),
         })
         .then((res)=>res.json())
         .then((data)=>{
             console.log(data)
-            useNavigate('/orders')
         })
     }
     return (

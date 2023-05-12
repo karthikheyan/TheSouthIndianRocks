@@ -101,7 +101,7 @@ routes.patch("/cart/remove/:uid",async(req,res)=>{
 
 routes.post("/completed/:uid",async(req,res)=>{
 try{
-      const products=req.body.Products
+      const products=req.body.Products[0]
       console.log(products)
       const user = await User.findById(req.params.uid)
    //   const userId=user._id;
@@ -112,7 +112,7 @@ try{
         console.log(product.quantity);
         const purchase= new Purchased({
             userId:user._id,
-            productId:product.productId,
+            productId:product._id,
             quantity:product.quantity,
             totalPrice:product.quantity*product.price
             })
@@ -120,6 +120,7 @@ try{
             user.purchased.push(purchase._id)
          
         }
+        user.cart = [];
         await user.save()
     
       res.status(200).json({ message: "Purchase history updated successfully" });
