@@ -190,7 +190,7 @@ a {
 }
 
 .nav-link:hover{
-    color: #482ff7;
+    color: #fff;
 }
 
 .nav-logo {
@@ -200,6 +200,7 @@ a {
 }
 
 .navbar button{
+    cursor: pointer;
     color: white;
     border: solid 0px;
     background-color: #fca311;
@@ -208,6 +209,10 @@ a {
     font-weight: 500;
     border-bottom: 3px solid #14213d;
     border-radius: 3px;
+}
+.navbar button:hover{
+    color: black;
+    background-color: #fff;
 }
 
 .navbar .home-button{
