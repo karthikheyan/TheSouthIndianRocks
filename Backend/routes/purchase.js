@@ -133,4 +133,15 @@ catch(err){
 
 
 
+routes.get("/users/:uid",async(req,res)=>{
+    try{
+      const purchase=await Purchased.find({userId:req.params.uid}) 
+      res.send(purchase)
+    }
+    catch(err){
+        res.send(err)
+    }
+})
+
+
 module.exports=routes
