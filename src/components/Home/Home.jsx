@@ -43,7 +43,7 @@ const Home = () => {
         <div className="manufacture">
             <div className="maufacture-flex">
                 <h3>Big Manufacturing outlet</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente quos recusandae eveniet ab illum tenetur, corrupti blanditiis nam voluptatum ipsa similique modi doloribus reprehenderit neque porro odio nisi facere consectetur!</p>
+                <p>Our factory is equipped with advanced machinery and equipment, carefully selected to optimize the production process. From raw material preparation to the final finishing touches, every step is meticulously executed to ensure precision and consistency in our tile manufacturing.</p>
             </div>
             <img src={manufactureImage} alt=""/>
         </div>
