@@ -2,6 +2,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { usePurchaseContext } from "../Context/usePurchaseContext";
 import { useUserContext } from "../Context/useUserContext";
 import { useNavigate } from "react-router-dom";
+import './checkout.css'
 export default function Checkout() {
     const navigate = useNavigate();
     const {cartDetails} = usePurchaseContext();
