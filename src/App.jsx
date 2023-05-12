@@ -32,13 +32,11 @@ function App() {
           {!user && <Route path='/login' element={<Login/>}></Route>}
           {!user && <Route path='/signup' element={<Signup/>}></Route>}
           {user && 
-          (
             <>
             <Route path='/cart' element={<Cart/>}></Route>
             <Route path='/orders' element={<OrderDetails/>}></Route>
             <Route path='/checkout' element={<Checkout/>}></Route>
             </>
-          )
           }
           <Route path='/products' element={<Products/>}></Route>
           <Route path='/types/:category' element={<Types/>}></Route>

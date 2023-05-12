@@ -3,26 +3,36 @@ import { Link } from "react-router-dom";
 import "./Cart.css";
 import { useUserContext } from "../Context/useUserContext";
 import Loading from "../Home/Loading";
+import { usePurchaseContext } from "../Context/usePurchaseContext";
 
 const Cart = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const {userDetails} = useUserContext();
-  const [cartQuantity, setCartQuantity] = useState(
-    cartItems.reduce((total, item) => total + item.quantity, 0)
-  );
+  const [cartQuantity, setCartQuantity] = useState(null)
   const [total, setTotal] = useState(0);
+  const {csetTotal, csetCartDetails} = usePurchaseContext();
 
   useEffect(() => {
     setIsPending(true);
     fetch(`http://localhost:3000/tsir/purchase/cart/${userDetails._id}`)
       .then((res) => res.json())
       .then((data) => {
-        setCartItems(data);
         for (let i in data) {
           data[i].quantity = 1;
         }
+        let cartDetails = { products: [] };
+        for (let i in data) {
+          let product = {
+            _id: data[i]._id,
+            quantity: data[i].quantity,
+            price: data[i].price,
+          };
+          cartDetails.products.push(product);
+        }
+        setCartItems(data);
+        csetCartDetails(cartDetails)
         setIsPending(false);
       })
       .catch((err) => {
@@ -30,20 +40,51 @@ const Cart = () => {
       });
   }, [userDetails._id]);
 
+  useEffect(()=>{
+    let cartDetails = { products: [] };
+    for (let i in cartItems) {
+      let product = {
+        _id: cartItems[i]._id,
+        quantity: cartItems[i].quantity,
+        price: cartItems[i].price,
+      };
+      cartDetails.products.push(product);
+    }
+    csetCartDetails(cartDetails);
+  },[cartItems])
+
   useEffect(() => {
     setTotal(
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
     );
+    csetTotal(
+      cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+    );
+    
+    setCartQuantity(
+      cartItems.reduce((total, item) => total + item.quantity, 0)
+    );
   }, [cartItems]);
 
-  const handleIncreaseQuantity = (item) => {
-    item.quantity += 1;
+  const handleIncreaseQuantity = async (item) => {
+    const updatedCartItems = cartItems.map((cartItem) =>
+      cartItem._id === item._id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+    );
+    setCartItems(updatedCartItems);
     setCartQuantity(cartQuantity + 1);
   };
 
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
+  
+  
   const handleDecreaseQuantity = (item) => {
     if (item.quantity > 1) {
-      item.quantity -= 1;
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem._id === item._id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+      );
+      setCartItems(updatedCartItems);
       setCartQuantity(cartQuantity - 1);
     }
   };
