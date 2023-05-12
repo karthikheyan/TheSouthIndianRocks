@@ -149,7 +149,9 @@ routes.get("/users/:uid", async (req, res) => {
                 productName: pro.pname,
                 quantity: purchaseItem.quantity,
                 totalPrice: purchaseItem.totalPrice,
-                imageUrl: pro.imageUrl
+                imageUrl: pro.img,
+                purchaseDate:purchaseItem.purchaseDate
+
             };
 
             purchaseHistory.push(purchaseDetails);
