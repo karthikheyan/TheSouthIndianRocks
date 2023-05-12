@@ -1,9 +1,6 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useLocation } from "react-router-dom";
 
-export default function Checkout(props) {
-    console.log(props)
-    // const { total } = location.state;
+export default function Checkout() {
     return (
         <PayPalScriptProvider options={{ "client-id": "test" }}>
             <PayPalButtons
