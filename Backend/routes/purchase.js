@@ -17,17 +17,17 @@ const product = require("../models/product")
 
 
 
-routes.get('/product/:id',async(req,res)=>{
-    try{
-        const purchased=await Product.find({_id:req.params.id});
-        console.log(purchased)
-        res.send("success")
-    }
-    catch(err){
-        console.log(err);
+// routes.get('/product/:id',async(req,res)=>{
+//     try{
+//         const purchased=await Product.find({_id:req.params.id});
+//         console.log(purchased)
+//         res.send("success")
+//     }
+//     catch(err){
+//         console.log(err);
 
-    }
-})
+//     }
+// })
 
 //request to add product to cart
 routes.post('/addtocart/:uid/:pid',async(req,res)=>{
@@ -103,7 +103,7 @@ routes.patch("/cart/remove/:uid",async(req,res)=>{
 routes.post("/completed/:uid",async(req,res)=>{
 try{
       const products=req.body.Products[0]
-      console.log(products)
+      //console.log(products)
       const user = await User.findById(req.params.uid)
    //   const userId=user._id;
    if (!user.purchased) {
@@ -133,14 +133,14 @@ catch(err){
 })
 
 
-
+// To give users purchase history
 routes.get("/users/:uid", async (req, res) => {
     try {
         const purchase = await Purchased.find({ userId: req.params.uid });
 
         // Array to store purchase history with product details
         const purchaseHistory = [];
-
+        console.log(purchase)
         for (const purchaseItem of purchase) {
             let pro = await Product.findById(purchaseItem.productId);
 

@@ -15,17 +15,17 @@ const purchaseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  quantity:{
-      type:Number,
-      required:true
+  quantity: {
+    type: Number,
+    required: true
   },
-  totalPrice:{
-      type:Number,
-      required:true
+  totalPrice: {
+    type: Number,
+    required: true
   },
-  isdeleivered:{
-       type:Boolean,
-       default:false
+  isdeleivered: {
+    type: Boolean,
+    default: false
   }
 });
 

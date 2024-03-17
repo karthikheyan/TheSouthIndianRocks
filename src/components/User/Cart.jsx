@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Cart.css";
 import { useUserContext } from "../Context/useUserContext";
@@ -9,10 +9,10 @@ const Cart = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const {userDetails} = useUserContext();
+  const { userDetails } = useUserContext();
   const [cartQuantity, setCartQuantity] = useState(null)
   const [total, setTotal] = useState(0);
-  const {csetTotal, csetCartDetails} = usePurchaseContext();
+  const { csetTotal, csetCartDetails } = usePurchaseContext();
 
   useEffect(() => {
     setIsPending(true);
@@ -40,7 +40,7 @@ const Cart = () => {
       });
   }, [userDetails._id]);
 
-  useEffect(()=>{
+  useEffect(() => {
     let cartDetails = { products: [] };
     for (let i in cartItems) {
       let product = {
@@ -51,7 +51,7 @@ const Cart = () => {
       cartDetails.products.push(product);
     }
     csetCartDetails(cartDetails);
-  },[cartItems])
+  }, [cartItems])
 
   useEffect(() => {
     setTotal(
@@ -60,7 +60,7 @@ const Cart = () => {
     csetTotal(
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
     );
-    
+
     setCartQuantity(
       cartItems.reduce((total, item) => total + item.quantity, 0)
     );
@@ -77,8 +77,8 @@ const Cart = () => {
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
-  
-  
+
+
   const handleDecreaseQuantity = (item) => {
     if (item.quantity > 1) {
       const updatedCartItems = cartItems.map((cartItem) =>
@@ -139,16 +139,16 @@ const Cart = () => {
         </div>
       )}
       {cartItems.length > 0 &&
-      <Link 
-      to={{
-          pathname:'/checkout',
-          state: {total}
-      }}
-      >
+        <Link
+          to={{
+            pathname: '/checkout',
+            state: { total }
+          }}
+        >
           <button>
-          proceed to checkout
+            proceed to checkout
           </button>
-      </Link>}
+        </Link>}
     </div>
   );
 }
